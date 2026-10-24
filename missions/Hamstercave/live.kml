@@ -3,5 +3,28 @@
   <Document>
     <name>Heenisteininu - Einsatz [Hamstercave]</name>
     
+    <Placemark>
+      <name><![CDATA[微笑狗]]></name>
+      <description><![CDATA[[Einsatz: Hamstercave]
+[Kategorie: 🟢 Versorgungspunkt / Sicherheitszone]
+
+Koord.: 51R UH 52551 65988 (25.00222, 121.53888)
+Stand: 25.10.2026, 03:31:35 (Neoyang)]]></description>
+      <Style>
+        <IconStyle>
+          <color>ff00ff00</color>
+          <scale>1.1</scale>
+          <Icon>
+            <href>https://HamsterTAK.github.io/Heenisteininu/google_pin.png</href>
+          </Icon>
+          <hotSpot x="0.5" y="0.04" xunits="fraction" yunits="fraction"/>
+        </IconStyle>
+        <LabelStyle>
+          <color>ffffffff</color>
+          <scale>1.0</scale>
+        </LabelStyle>
+      </Style>
+      <Point><coordinates>121.538875,25.00222,0</coordinates></Point>
+    </Placemark>
   </Document>
 </kml>
