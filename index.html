@@ -1921,7 +1921,7 @@
 
       const missionKmlUrl = `https://${owner}.github.io/${repo}/${getMissionFilePath('live.kml')}`;
       statusEl.innerText = `✅ [${currentMissionCode}] Gesendet (${timeStr})`;
-      alert(`Einsatz 【${currentMissionCode}】 erfolgreich veröffentlicht!\n\nATAK-Abonnement-URL für diesen Einsatz:\n${missionKmlUrl}\n\n(Oder oben auf „📲 ATAK-Link“ klicken, um die automatische Update-Datei herunterzuladen)`);
+      alert(`🟢 Einsatz 【${currentMissionCode}】 erfolgreich veröffentlicht!\n\nATAK-Abonnement-URL für diesen Einsatz:\n${missionKmlUrl}\n\n(Oder oben auf „📲 ATAK-Link“ klicken, um die automatische Update-Datei herunterzuladen)`);
     } catch (err) {
       statusEl.innerText = '❌ Senden fehlgeschlagen';
       alert('Speichern fehlgeschlagen: ' + err.message);
