@@ -1,4 +1,24 @@
 {
   "type": "FeatureCollection",
-  "features": []
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "微笑狗",
+        "category": "supply",
+        "desc": "",
+        "stream": "",
+        "coord": "51R UH 52551 65988 (25.00222, 121.53888)",
+        "time": "25.10.2026, 03:31:35 (Neoyang)",
+        "updatedBy": "Neoyang"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.538875,
+          25.00222
+        ]
+      }
+    }
+  ]
 }
