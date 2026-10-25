@@ -19,6 +19,25 @@
           25.00222
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "邪惡祭壇",
+        "category": "danger",
+        "desc": "",
+        "stream": "",
+        "coord": "51R UH 51895 65879 (25.00117, 121.53239)",
+        "time": "25.10.2026, 21:42:41 (Neoyang)",
+        "updatedBy": "Neoyang"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.532389,
+          25.001169
+        ]
+      }
     }
   ]
 }
