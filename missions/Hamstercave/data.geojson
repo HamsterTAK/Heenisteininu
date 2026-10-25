@@ -19,25 +19,6 @@
           25.00222
         ]
       }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "邪惡祭壇",
-        "category": "danger",
-        "desc": "",
-        "stream": "",
-        "coord": "51R UH 51900 65880 (25.00118, 121.53245)",
-        "time": "25.10.2026, 21:43:24 (Stephanie)",
-        "updatedBy": "Stephanie"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          121.532446,
-          25.001179
-        ]
-      }
     }
   ]
 }
