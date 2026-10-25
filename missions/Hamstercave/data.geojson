@@ -27,15 +27,15 @@
         "category": "danger",
         "desc": "",
         "stream": "",
-        "coord": "51R UH 51895 65879 (25.00117, 121.53239)",
-        "time": "25.10.2026, 21:42:41 (Neoyang)",
-        "updatedBy": "Neoyang"
+        "coord": "51R UH 51900 65880 (25.00118, 121.53245)",
+        "time": "25.10.2026, 21:43:24 (Stephanie)",
+        "updatedBy": "Stephanie"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          121.532389,
-          25.001169
+          121.532446,
+          25.001179
         ]
       }
     }
