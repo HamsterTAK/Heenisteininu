@@ -32,8 +32,8 @@ Stand: 25.10.2026, 18:39:05 (Neoyang)]]></description>
       <description><![CDATA[[Einsatz: Hamstercave]
 [Kategorie: 🔴 Gefahrenzone / Sperrgebiet]
 
-Koord.: 51R UH 51895 65879 (25.00117, 121.53239)
-Stand: 25.10.2026, 21:42:41 (Neoyang)]]></description>
+Koord.: 51R UH 51900 65880 (25.00118, 121.53245)
+Stand: 25.10.2026, 21:43:24 (Stephanie)]]></description>
       <Style>
         <IconStyle>
           <color>ff0000ff</color>
@@ -48,7 +48,7 @@ Stand: 25.10.2026, 21:42:41 (Neoyang)]]></description>
           <scale>1.0</scale>
         </LabelStyle>
       </Style>
-      <Point><coordinates>121.532389,25.001169,0</coordinates></Point>
+      <Point><coordinates>121.532446,25.001179,0</coordinates></Point>
     </Placemark>
   </Document>
 </kml>
