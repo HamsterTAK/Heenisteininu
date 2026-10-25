@@ -27,5 +27,28 @@ Stand: 25.10.2026, 18:39:05 (Neoyang)]]></description>
       </Style>
       <Point><coordinates>121.538875,25.00222,0</coordinates></Point>
     </Placemark>
+    <Placemark>
+      <name><![CDATA[邪惡祭壇]]></name>
+      <description><![CDATA[[Einsatz: Hamstercave]
+[Kategorie: 🔴 Gefahrenzone / Sperrgebiet]
+
+Koord.: 51R UH 51895 65879 (25.00117, 121.53239)
+Stand: 25.10.2026, 21:42:41 (Neoyang)]]></description>
+      <Style>
+        <IconStyle>
+          <color>ff0000ff</color>
+          <scale>1.1</scale>
+          <Icon>
+            <href>https://HamsterTAK.github.io/Heenisteininu/google_pin.png</href>
+          </Icon>
+          <hotSpot x="0.5" y="0.04" xunits="fraction" yunits="fraction"/>
+        </IconStyle>
+        <LabelStyle>
+          <color>ffffffff</color>
+          <scale>1.0</scale>
+        </LabelStyle>
+      </Style>
+      <Point><coordinates>121.532389,25.001169,0</coordinates></Point>
+    </Placemark>
   </Document>
 </kml>
