@@ -11,6 +11,44 @@
     body, html { margin: 0; padding: 0; height: 100%; width: 100%; overflow: hidden; font-family: system-ui, -apple-system, sans-serif; background: #0f172a; }
 
     /* ==========================================================================
+       1.9秒頻率戰術呼吸燈號 (Status Breathing LED)
+       ========================================================================== */
+    .status-container {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(15, 23, 42, 0.75); padding: 3px 9px;
+      border-radius: 4px; border: 1px solid #334155;
+    }
+    .status-led {
+      width: 9px; height: 9px; border-radius: 50%;
+      background-color: #10b981;
+      box-shadow: 0 0 8px #10b981, 0 0 14px #10b981;
+      animation: breathe-green 1.9s infinite ease-in-out;
+      flex-shrink: 0;
+    }
+    .status-led.busy {
+      background-color: #f59e0b;
+      box-shadow: 0 0 8px #f59e0b, 0 0 14px #f59e0b;
+      animation: breathe-amber 0.9s infinite ease-in-out;
+    }
+    .status-led.error {
+      background-color: #ef4444;
+      box-shadow: 0 0 8px #ef4444, 0 0 14px #ef4444;
+      animation: breathe-red 1.2s infinite ease-in-out;
+    }
+    @keyframes breathe-green {
+      0%, 100% { opacity: 0.28; transform: scale(0.88); box-shadow: 0 0 3px #10b981; }
+      50% { opacity: 1; transform: scale(1.12); box-shadow: 0 0 10px #10b981, 0 0 18px rgba(16, 185, 129, 0.75); }
+    }
+    @keyframes breathe-amber {
+      0%, 100% { opacity: 0.35; transform: scale(0.9); box-shadow: 0 0 3px #f59e0b; }
+      50% { opacity: 1; transform: scale(1.15); box-shadow: 0 0 10px #f59e0b, 0 0 18px rgba(245, 158, 11, 0.8); }
+    }
+    @keyframes breathe-red {
+      0%, 100% { opacity: 0.35; transform: scale(0.9); box-shadow: 0 0 3px #ef4444; }
+      50% { opacity: 1; transform: scale(1.15); box-shadow: 0 0 10px #ef4444, 0 0 18px rgba(239, 68, 68, 0.8); }
+    }
+
+    /* ==========================================================================
        Anmelde-Gate (Einsatzcode) & Einsatzverwaltung
        ========================================================================== */
     #mission-login-overlay {
@@ -71,17 +109,18 @@
        ========================================================================== */
     #topbar {
       display: flex; flex-wrap: wrap; gap: 6px; align-items: center;
-      background: #1e293b; color: #f8fafc; padding: 8px 12px; font-size: 13px;
+      background: #1e293b; color: #f8fafc; padding: 6px 10px; font-size: 13px;
       border-bottom: 1px solid #334155; z-index: 2000; position: relative;
     }
     #topbar input, #topbar select, #topbar button {
-      padding: 5px 9px; border-radius: 4px; border: 1px solid #475569; font-size: 12px;
+      padding: 4px 8px; border-radius: 4px; border: 1px solid #475569; font-size: 12px;
     }
     #topbar input, #topbar select { background: #0f172a; color: #fff; }
     .mission-badge {
       background: #0f172a; color: #00ffcc; border: 1px solid #00ffcc;
-      padding: 4px 8px; border-radius: 4px; font-family: monospace; font-weight: bold;
-      display: flex; align-items: center; gap: 6px; cursor: pointer;
+      padding: 3px 7px; border-radius: 4px; font-family: monospace; font-weight: bold;
+      display: flex; align-items: center; gap: 5px; cursor: pointer; white-space: nowrap;
+      font-size: 12px;
     }
     .btn { cursor: pointer; font-weight: 600; border: none !important; color: white; transition: opacity 0.2s; white-space: nowrap; }
     .btn:hover:not(:disabled) { opacity: 0.9; }
@@ -92,13 +131,17 @@
     .btn-del-mission { background: #7f1d1d; color: #fecaca; display: none; }
     .btn-del-mission:hover { background: #dc2626; color: #fff; }
 
-    .right-group { margin-left: auto; display: flex; align-items: center; gap: 8px; }
-    #status { color: #38bdf8; font-weight: bold; font-size: 12px; white-space: nowrap; }
-    #user-callsign { border-color: #38bdf8 !important; width: 125px; }
+    .right-group { margin-left: auto; display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+    #status { color: #38bdf8; font-weight: bold; font-size: 12px; white-space: nowrap; font-family: monospace; }
+    #user-callsign { border-color: #38bdf8 !important; width: 115px; }
 
-    #map { height: calc(100% - 50px); width: 100%; background: #000000; position: relative; }
+    #map { height: calc(100% - 44px); width: 100%; background: #000000; position: relative; }
 
-    body.readonly-mode .leaflet-pm-toolbar { display: none !important; }
+    /* 唯讀模式下僅隱藏繪圖與編輯工具列，保留獨立的 Fullscreen 按鈕 */
+    body.readonly-mode .leaflet-pm-toolbar.leaflet-pm-draw,
+    body.readonly-mode .leaflet-pm-toolbar.leaflet-pm-edit {
+      display: none !important;
+    }
 
     .pm-custom-btn {
       display: flex !important; align-items: center; justify-content: center;
@@ -115,9 +158,7 @@
     /* ==========================================================================
        Objektübersicht (Feature Summary Control) oben rechts
        ========================================================================== */
-    .feature-summary-control {
-      position: relative;
-    }
+    .feature-summary-control { position: relative; }
     .feature-summary-btn {
       width: 44px; height: 44px; background: #ffffff; border: 2px solid rgba(0,0,0,0.2);
       border-radius: 5px; cursor: pointer; display: flex; align-items: center; justify-content: center;
@@ -189,20 +230,21 @@
       box-shadow: 0 2px 6px rgba(0,0,0,0.5); white-space: nowrap;
     }
 
-    /* Einsatztagebuch & Funkspruch-Panel unten rechts */
+    /* Einsatztagebuch & Funkspruch-Panel unten rechts (400px 寬度單行不折行) */
     #log-panel {
-      position: fixed; right: 12px; bottom: 48px; width: 350px; max-width: calc(100vw - 24px);
+      position: fixed; right: 12px; bottom: 48px; width: 400px; max-width: calc(100vw - 24px);
       background: rgba(15, 23, 42, 0.96); color: #f8fafc; border: 1px solid #475569;
       border-radius: 8px; box-shadow: 0 8px 25px rgba(0,0,0,0.7); z-index: 1500;
       display: flex; flex-direction: column; overflow: hidden;
     }
     #log-header {
       background: #1e293b; padding: 8px 12px; display: flex; align-items: center;
-      justify-content: space-between; cursor: pointer; user-select: none;
+      justify-content: space-between; gap: 8px; cursor: pointer; user-select: none;
       border-bottom: 1px solid #334155; font-size: 13px; font-weight: bold;
+      white-space: nowrap;
     }
-    #log-header-left { display: flex; align-items: center; gap: 6px; color: #38bdf8; }
-    #log-header-actions { display: flex; align-items: center; gap: 6px; }
+    #log-header-left { display: flex; align-items: center; gap: 6px; color: #38bdf8; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    #log-header-actions { display: flex; align-items: center; gap: 6px; flex-shrink: 0; white-space: nowrap; }
     #btn-clear-logs {
       display: none; background: #ef4444; color: #fff; border: none; border-radius: 4px;
       padding: 2px 7px; font-size: 12px; cursor: pointer;
@@ -279,7 +321,7 @@
         bottom: 6px; left: 8px; transform: none; max-width: calc(100vw - 16px);
         font-size: 11px; padding: 4px 8px;
       }
-      #log-panel { right: 8px; bottom: 38px; width: 290px; }
+      #log-panel { right: 8px; bottom: 38px; width: 310px; }
       #log-body { height: 180px; }
       #feature-summary-panel { width: 290px; max-height: 55vh; }
     }
@@ -332,17 +374,20 @@
     <span style="font-size:10px; color:#94a3b8;">🔄</span>
   </div>
 
-  <input type="password" id="gh-token" placeholder="GitHub-Token (Schreibrecht)" style="width:135px;" />
-  <input type="text" id="gh-owner" placeholder="Konto" style="width:85px;" />
-  <input type="text" id="gh-repo" placeholder="Repo" style="width:90px;" />
+  <input type="password" id="gh-token" placeholder="GitHub-Token (Schreibrecht)" style="width:130px;" />
+  <input type="text" id="gh-owner" placeholder="Konto" style="width:80px;" />
+  <input type="text" id="gh-repo" placeholder="Repo" style="width:85px;" />
   
-  <button class="btn btn-save" id="btn-publish" onclick="publishToGitHub()" style="display:none;">Speichern & Senden</button>
-  <button class="btn btn-video" onclick="promptOpenTacticalPopout()" title="Stream-URL eingeben, um taktisches Videofenster zu öffnen">Videoüberwachung</button>
-  <button class="btn btn-manage" id="btn-top-manage" onclick="openMissionManagerModal()" title="Cloud-Einsatzverwaltung öffnen">Einsätze</button>
-  <button class="btn btn-del-mission" id="btn-delete-mission" onclick="deleteMissionByCode(currentMissionCode)" title="Diesen Einsatz samt aller Dateien unwiderruflich aus der Cloud löschen">Einsatz löschen</button>
+  <button class="btn btn-save" id="btn-publish" onclick="publishToGitHub()" style="display:none;">☁️ Speichern & Senden</button>
+  <button class="btn btn-video" onclick="promptOpenTacticalPopout()" title="Stream-URL eingeben, um taktisches Videofenster zu öffnen">📺 Videoüberwachung</button>
+  <button class="btn btn-manage" id="btn-top-manage" onclick="openMissionManagerModal()" title="Cloud-Einsatzverwaltung öffnen">🗂️ Einsätze</button>
+  <button class="btn btn-del-mission" id="btn-delete-mission" onclick="deleteMissionByCode(currentMissionCode)" title="Diesen Einsatz samt aller Dateien unwiderruflich aus der Cloud löschen">💣 Einsatz löschen</button>
   
   <div class="right-group">
-    <span id="status">Einsatzbereit</span>
+    <div class="status-container" title="Taktischer Systemstatus">
+      <span id="status-led" class="status-led"></span>
+      <span id="status">Einsatzbereit</span>
+    </div>
     <input type="text" id="user-callsign" placeholder="👤 Rufzeichen" title="Ihr Rufzeichen wird bei Änderungen automatisch mit Zeitstempel protokolliert" />
   </div>
 </div>
@@ -421,6 +466,43 @@
   let currentMissionCode = '';
   let isTokenVerified = false;
 
+  function setSystemStatus(text, ledState = 'ok') {
+    const statusEl = document.getElementById('status');
+    const ledEl = document.getElementById('status-led');
+    if (statusEl) statusEl.innerText = text;
+    if (ledEl) {
+      ledEl.classList.remove('busy', 'error');
+      if (ledState === 'busy') ledEl.classList.add('busy');
+      else if (ledState === 'error') ledEl.classList.add('error');
+    }
+  }
+
+  function injectCustomToolbarIcons() {
+    const undoIconEl = document.querySelector('.leaflet-pm-icon-undo');
+    if (undoIconEl) {
+      undoIconEl.innerHTML = `
+        <div id="pm-undo-container" class="pm-custom-btn pm-undo-disabled">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 7v6h6"></path>
+            <path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"></path>
+          </svg>
+          <span id="pm-undo-badge" class="pm-undo-badge">0</span>
+        </div>`;
+    }
+    const fsIconEl = document.querySelector('.leaflet-pm-icon-fullscreen');
+    if (fsIconEl) {
+      fsIconEl.innerHTML = `
+        <div class="pm-custom-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+          </svg>
+        </div>`;
+    }
+    if (typeof cleanAndRefreshUndoUI === 'function') {
+      cleanAndRefreshUndoUI();
+    }
+  }
+
   function sanitizeMissionCode(raw) {
     return String(raw || '').trim().replace(/[^a-zA-Z0-9_-]/g, '-');
   }
@@ -439,26 +521,24 @@
     return 'http://' + v;
   }
 
-window.openTacticalStreamWindow = function(rawStreamUrl) {
+  window.openTacticalStreamWindow = function(rawStreamUrl) {
     const fullUrl = formatCustomStreamUrl(rawStreamUrl);
     if (!fullUrl) return;
-    const winName = 'HamsterTAK_Monitor_' + Math.random().toString(36).substring(2, 7);
+    const winName = 'HeenTAK_Monitor_' + Math.random().toString(36).substring(2, 7);
     const winSpecs = 'width=540,height=360,menubar=no,toolbar=no,location=no,status=no,resizable=yes,scrollbars=no';
 
-    // 偵測是否為公部門 CCTV 常見的 HTTP-FLV 裸串流 (含 /flv/ 或 .flv)
     const isFlvStream = /\/flv\/|\.flv($|\?)/i.test(fullUrl);
     if (!isFlvStream) {
       window.open(fullUrl, winName, winSpecs);
       return;
     }
 
-    // 若為 FLV 裸串流，動態生成內建 mpegts.js 解碼器的暗黑戰術監控視窗，防止瀏覽器觸發下載！
     const safeUrl = fullUrl.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
     const playerHtml = `<!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>🎥 Tactical CCTV Monitor (FLV)</title>
+  <title>🎥 Taktischer CCTV-Monitor (FLV)</title>
   <script src="https://cdn.jsdelivr.net/npm/mpegts.js@1.7.3/dist/mpegts.js"><\/script>
   <style>
     body, html { margin:0; padding:0; width:100%; height:100%; background:#0f172a; color:#f8fafc; font-family:monospace; display:flex; flex-direction:column; overflow:hidden; }
@@ -470,12 +550,12 @@ window.openTacticalStreamWindow = function(rawStreamUrl) {
 </head>
 <body>
   <div id="bar">
-    <span>🟢 LIVE FLV STREAM</span>
+    <span>🟢 LIVE FLV-STREAM</span>
     <span style="color:#38bdf8; font-size:10px; margin-left:8px;">${escapeHTML(fullUrl)}</span>
   </div>
   <div id="vid-wrap">
     <video id="v" autoplay muted controls playsinline></video>
-    <div id="msg">⏳ 正在解碼即時影像串流 (Decoding FLV)...</div>
+    <div id="msg">⏳ Dekodiere Live-Video-Stream (FLV)...</div>
   </div>
   <script>
     const url = '${safeUrl}';
@@ -485,14 +565,14 @@ window.openTacticalStreamWindow = function(rawStreamUrl) {
       const player = mpegts.createPlayer({ type: 'flv', isLive: true, hasAudio: false, url: url }, { enableWorker: true, enableStashBuffer: false, stashInitialSize: 128 });
       player.attachMediaElement(v);
       player.load();
-      player.play().then(() => { msg.style.display = 'none'; }).catch(() => { msg.innerText = '▶️ 請點擊畫面開始播放'; });
+      player.play().then(() => { msg.style.display = 'none'; }).catch(() => { msg.innerText = '▶️ Bitte auf das Bild klicken, um die Wiedergabe zu starten'; });
       v.addEventListener('playing', () => { msg.style.display = 'none'; });
-      player.on(mpegts.Events.ERROR, (errType, errDetail) => {
+      player.on(mpegts.Events.ERROR, (errType) => {
         msg.style.display = 'block';
-        msg.innerHTML = '⚠️ 串流遭目標伺服器 CORS 跨網域阻擋或離線 (' + errType + ')<br><span style="color:#f59e0b;font-size:11px;">建議改由 MediaMTX 中繼拉流以突破瀏覽器限制</span>';
+        msg.innerHTML = '⚠️ Stream durch Zielserver (CORS) blockiert oder offline (' + errType + ')<br><span style="color:#f59e0b;font-size:11px;">Empfehlung: Stream über MediaMTX-Relay weiterleiten</span>';
       });
     } else {
-      msg.innerText = '❌ 此瀏覽器環境不支援 MSE/FLV 硬體解碼';
+      msg.innerText = '❌ Dieser Browser unterstützt keine MSE/FLV-Hardwaredekodierung';
     }
   <\/script>
 </body>
@@ -908,7 +988,7 @@ window.openTacticalStreamWindow = function(rawStreamUrl) {
   }
 
   // ============================================================================
-  // 4. Strenge Einsatzprüfung & Einsatzverwaltung (Heenisteininu)
+  // 4. Strenge Einsatzprüfung & Einsatzverwaltung (inkl. Zweistufiger Sicherheitsabfrage)
   // ============================================================================
   async function checkMissionExistsOnCloud(code) {
     const owner = document.getElementById('gh-owner').value.trim() || 'HamsterTAK';
@@ -1075,9 +1155,11 @@ window.openTacticalStreamWindow = function(rawStreamUrl) {
     });
   };
 
-  window.openMissionManagerModal = function() {
-    switchMissionPrompt();
-    loadMissionDirectoryList();
+  window.openMissionManagerModal = async function() {
+    const exited = await switchMissionPrompt();
+    if (exited) {
+      loadMissionDirectoryList();
+    }
   };
 
   async function activateMission(code) {
@@ -1097,18 +1179,32 @@ window.openTacticalStreamWindow = function(rawStreamUrl) {
     cleanAndRefreshUndoUI();
     renderFeatureSummaryList();
 
-    document.getElementById('status').innerText = `⏳ Lade Einsatz [${currentMissionCode}]...`;
+    setSystemStatus(`Lade [${currentMissionCode}]...`, 'busy');
 
     await loadExistingData();
     await verifyGitHubToken();
   }
 
-  window.switchMissionPrompt = function() {
+  // Zweistufige Sicherheitsabfrage beim Verlassen / Einsatzwechsel
+  window.switchMissionPrompt = async function() {
+    if (currentMissionCode) {
+      const wantExit = confirm(`⚠️ Möchten Sie den aktuellen Einsatz 【${currentMissionCode}】 wirklich verlassen und zur Einsatzverwaltung zurückkehren?`);
+      if (!wantExit) return false;
+
+      if (isTokenVerified) {
+        const wantSave = confirm(`💾 Möchten Sie vor dem Verlassen die aktuellen Änderungen für Einsatz 【${currentMissionCode}】 speichern und senden?\n\n(OK = Speichern & Verlassen; Abbrechen = Ohne Speichern verlassen)`);
+        if (wantSave) {
+          await publishToGitHub();
+        }
+      }
+    }
+
     document.getElementById('login-mission-code').value = currentMissionCode;
     document.getElementById('login-token').value = document.getElementById('gh-token').value;
     document.getElementById('login-callsign').value = document.getElementById('user-callsign').value;
     document.getElementById('mission-login-overlay').style.display = 'flex';
     document.getElementById('login-mission-code').select();
+    return true;
   };
 
   window.deleteMissionByCode = async function(targetCode) {
@@ -1128,8 +1224,7 @@ window.openTacticalStreamWindow = function(rawStreamUrl) {
     const token = document.getElementById('gh-token').value.trim();
     const owner = document.getElementById('gh-owner').value.trim() || 'HamsterTAK';
     const repo = document.getElementById('gh-repo').value.trim() || 'Heenisteininu';
-    const statusEl = document.getElementById('status');
-    statusEl.innerText = `⏳ Lösche Einsatz [${targetCode}]...`;
+    setSystemStatus(`Lösche [${targetCode}]...`, 'busy');
 
     try {
       const dirUrl = `https://api.github.com/repos/${owner}/${repo}/contents/missions/${targetCode}?t=${Date.now()}`;
@@ -1149,12 +1244,13 @@ window.openTacticalStreamWindow = function(rawStreamUrl) {
         currentMissionCode = '';
         document.getElementById('login-mission-code').value = '';
         document.getElementById('mission-login-overlay').style.display = 'flex';
+        setSystemStatus('Einsatzbereit', 'ok');
       }
       if (document.getElementById('mission-manager-box').style.display === 'block') {
         loadMissionDirectoryList();
       }
     } catch (err) {
-      statusEl.innerText = '❌ Löschen fehlgeschlagen';
+      setSystemStatus('Löschen fehlgeschlagen', 'error');
       alert('Fehler beim Löschen des Einsatzes: ' + err.message);
     }
   };
@@ -1303,7 +1399,7 @@ window.openTacticalStreamWindow = function(rawStreamUrl) {
     tacticalLogs = [];
     renderLogList();
     await syncLogsToGitHubSilent(`Tagebuch für Einsatz ${currentMissionCode} geleert`);
-    document.getElementById('status').innerText = '🗑️ Einsatztagebuch geleert';
+    setSystemStatus(`Tagebuch geleert`, 'ok');
   };
 
   async function loadExistingLogs() {
@@ -1408,7 +1504,7 @@ window.openTacticalStreamWindow = function(rawStreamUrl) {
     });
     cleanAndRefreshUndoUI();
     renderFeatureSummaryList();
-    document.getElementById('status').innerText = `↩️ Schritt rückgängig gemacht (noch ${undoStack.length})`;
+    setSystemStatus(`Rückgängig (${undoStack.length})`, 'ok');
     appendTacticalLog('action', `Hat den letzten Bearbeitungsschritt rückgängig gemacht (Undo)`);
   };
 
@@ -1424,7 +1520,6 @@ window.openTacticalStreamWindow = function(rawStreamUrl) {
     }
   });
 
-  map.pm.setLang('de');
   map.pm.addControls({
     position: 'topleft',
     drawMarker: true, drawPolyline: true, drawPolygon: true, drawRectangle: true,
@@ -1440,11 +1535,14 @@ window.openTacticalStreamWindow = function(rawStreamUrl) {
   });
 
   map.pm.Toolbar.createCustomControl({
-    name: 'FullscreenAction', block: 'edit',
+    name: 'FullscreenAction', block: 'custom',
     title: 'Vollbildmodus umschalten',
     toggle: false, onClick: () => toggleFullScreenMode(), afterClick: () => {},
     className: 'leaflet-pm-icon-fullscreen'
   });
+
+  map.pm.setLang('de');
+  injectCustomToolbarIcons();
 
   window.toggleFullScreenMode = function() {
     const docEl = document.documentElement;
@@ -1493,7 +1591,7 @@ window.openTacticalStreamWindow = function(rawStreamUrl) {
     renderFeatureSummaryList();
     const removedName = (e.layer.feature && e.layer.feature.properties && e.layer.feature.properties.name) || 'Unbenanntes Objekt';
     const removedCoord = getLayerCoordString(e.layer);
-    document.getElementById('status').innerText = `🗑️ „${removedName}“ gelöscht (Rückgängig links möglich)`;
+    setSystemStatus(`Gelöscht: ${removedName}`, 'ok');
     appendTacticalLog('action', `Objekt „${removedName}“ gelöscht (${removedCoord})`);
   });
 
@@ -1529,7 +1627,7 @@ window.openTacticalStreamWindow = function(rawStreamUrl) {
     map.removeLayer(layer);
     drawnItems.removeLayer(layer);
     renderFeatureSummaryList();
-    document.getElementById('status').innerText = `🗑️ „${removedName}“ gelöscht (Rückgängig links möglich)`;
+    setSystemStatus(`Gelöscht: ${removedName}`, 'ok');
     appendTacticalLog('action', `Objekt „${removedName}“ gelöscht (${removedCoord})`);
   };
 
@@ -1673,26 +1771,7 @@ window.openTacticalStreamWindow = function(rawStreamUrl) {
   // 8. Systemstart & Laden bestehender Einsatzdaten (Heenisteininu)
   // ============================================================================
   window.addEventListener('DOMContentLoaded', () => {
-    const undoIconEl = document.querySelector('.leaflet-pm-icon-undo');
-    if (undoIconEl) {
-      undoIconEl.innerHTML = `
-        <div id="pm-undo-container" class="pm-custom-btn pm-undo-disabled">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 7v6h6"></path>
-            <path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"></path>
-          </svg>
-          <span id="pm-undo-badge" class="pm-undo-badge">0</span>
-        </div>`;
-    }
-    const fsIconEl = document.querySelector('.leaflet-pm-icon-fullscreen');
-    if (fsIconEl) {
-      fsIconEl.innerHTML = `
-        <div class="pm-custom-btn">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
-          </svg>
-        </div>`;
-    }
+    injectCustomToolbarIcons();
 
     const host = window.location.hostname;
     const pathParts = window.location.pathname.split('/').filter(Boolean);
@@ -1740,7 +1819,7 @@ window.openTacticalStreamWindow = function(rawStreamUrl) {
 
       if (!geojson) {
         renderFeatureSummaryList();
-        document.getElementById('status').innerText = `✅ Einsatz [${currentMissionCode}] aktiv`;
+        setSystemStatus(`Aktiv [${currentMissionCode}]`, 'ok');
         return;
       }
 
@@ -1754,10 +1833,10 @@ window.openTacticalStreamWindow = function(rawStreamUrl) {
       if (drawnItems.getLayers().length > 0) {
         map.fitBounds(drawnItems.getBounds(), { maxZoom: 17, padding: [40, 40] });
       }
-      document.getElementById('status').innerText = `✅ Einsatz [${currentMissionCode}] geladen`;
+      setSystemStatus(`Geladen [${currentMissionCode}]`, 'ok');
     } catch (e) {
       renderFeatureSummaryList();
-      document.getElementById('status').innerText = `✅ Bereit [${currentMissionCode}]`;
+      setSystemStatus(`Bereit [${currentMissionCode}]`, 'ok');
     }
   }
 
@@ -1948,8 +2027,7 @@ window.openTacticalStreamWindow = function(rawStreamUrl) {
       return;
     }
 
-    const statusEl = document.getElementById('status');
-    statusEl.innerText = `⏳ Sende Einsatz [${currentMissionCode}] in die Cloud...`;
+    setSystemStatus(`Sende [${currentMissionCode}]...`, 'busy');
 
     try {
       const isValid = await verifyGitHubToken();
@@ -1973,10 +2051,10 @@ window.openTacticalStreamWindow = function(rawStreamUrl) {
       await putGitHubFile(owner, repo, getMissionFilePath('logs.json'), logsStr, token, `[${currentMissionCode}] Einsatztagebuch aktualisiert (${timeStr}${byWho})`);
 
       const missionKmlUrl = `https://${owner}.github.io/${repo}/${getMissionFilePath('live.kml')}`;
-      statusEl.innerText = `✅ [${currentMissionCode}] Gesendet (${timeStr})`;
-      alert(`🟢 Einsatz 【${currentMissionCode}】 erfolgreich veröffentlicht!\n\nATAK-Abonnement-URL für diesen Einsatz:\n${missionKmlUrl}\n\n(Oder oben auf „📲 ATAK-Link“ klicken, um die automatische Update-Datei herunterzuladen)`);
+      setSystemStatus(`[${currentMissionCode}] (${timeStr})`, 'ok');
+      alert(`🟢 Einsatz 【${currentMissionCode}】 erfolgreich veröffentlicht!\n\nATAK-Abonnement-URL für diesen Einsatz:\n${missionKmlUrl}`);
     } catch (err) {
-      statusEl.innerText = '❌ Senden fehlgeschlagen';
+      setSystemStatus('Senden fehlgeschlagen', 'error');
       alert('Speichern fehlgeschlagen: ' + err.message);
     }
   }
