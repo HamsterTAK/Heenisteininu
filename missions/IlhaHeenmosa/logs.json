@@ -328,5 +328,11 @@
     "user": "Stephanie",
     "type": "action",
     "text": "Objekt „文山藥園“ gelöscht (51R UH 61055 60865 (24.95676, 121.62364))"
+  },
+  {
+    "time": "28.10.2026, 06:19:45",
+    "user": "Stephanie",
+    "type": "action",
+    "text": "Hat den letzten Bearbeitungsschritt rückgängig gemacht (Undo)"
   }
 ]
