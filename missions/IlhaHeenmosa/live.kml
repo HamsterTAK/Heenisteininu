@@ -3,6 +3,191 @@
   <Document>
     <name>Heenisteininu - Einsatz [IlhaHeenmosa]</name>
     
+    <Style id="style_danger">
+      <IconStyle>
+        <color>ff0000ff</color>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://HamsterTAK.github.io/Heenisteininu/google_pin.png</href>
+        </Icon>
+        <hotSpot x="0.5" y="0.04" xunits="fraction" yunits="fraction"/>
+      </IconStyle>
+      <LabelStyle>
+        <color>ffffffff</color>
+        <scale>1.0</scale>
+      </LabelStyle>
+      <LineStyle>
+        <color>ff0000ff</color>
+        <width>4</width>
+      </LineStyle>
+      <PolyStyle>
+        <color>660000ff</color>
+        <fill>1</fill>
+        <outline>1</outline>
+      </PolyStyle>
+    </Style>
+    <Style id="style_rescue">
+      <IconStyle>
+        <color>ff00ffff</color>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://HamsterTAK.github.io/Heenisteininu/google_pin.png</href>
+        </Icon>
+        <hotSpot x="0.5" y="0.04" xunits="fraction" yunits="fraction"/>
+      </IconStyle>
+      <LabelStyle>
+        <color>ffffffff</color>
+        <scale>1.0</scale>
+      </LabelStyle>
+      <LineStyle>
+        <color>ff00ffff</color>
+        <width>4</width>
+      </LineStyle>
+      <PolyStyle>
+        <color>6600ffff</color>
+        <fill>1</fill>
+        <outline>1</outline>
+      </PolyStyle>
+    </Style>
+    <Style id="style_supply">
+      <IconStyle>
+        <color>ff00ff00</color>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://HamsterTAK.github.io/Heenisteininu/google_pin.png</href>
+        </Icon>
+        <hotSpot x="0.5" y="0.04" xunits="fraction" yunits="fraction"/>
+      </IconStyle>
+      <LabelStyle>
+        <color>ffffffff</color>
+        <scale>1.0</scale>
+      </LabelStyle>
+      <LineStyle>
+        <color>ff00ff00</color>
+        <width>4</width>
+      </LineStyle>
+      <PolyStyle>
+        <color>6600ff00</color>
+        <fill>1</fill>
+        <outline>1</outline>
+      </PolyStyle>
+    </Style>
+    <Style id="style_friendly">
+      <IconStyle>
+        <color>ffff0000</color>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://HamsterTAK.github.io/Heenisteininu/google_pin.png</href>
+        </Icon>
+        <hotSpot x="0.5" y="0.04" xunits="fraction" yunits="fraction"/>
+      </IconStyle>
+      <LabelStyle>
+        <color>ffffffff</color>
+        <scale>1.0</scale>
+      </LabelStyle>
+      <LineStyle>
+        <color>ffff0000</color>
+        <width>4</width>
+      </LineStyle>
+      <PolyStyle>
+        <color>66ff0000</color>
+        <fill>1</fill>
+        <outline>1</outline>
+      </PolyStyle>
+    </Style>
+    <Style id="style_casevac">
+      <IconStyle>
+        <color>ffffffff</color>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://HamsterTAK.github.io/Heenisteininu/pin_casevac_v2.png</href>
+        </Icon>
+        <hotSpot x="0.5" y="0.28" xunits="fraction" yunits="fraction"/>
+      </IconStyle>
+      <LabelStyle>
+        <color>ffffffff</color>
+        <scale>1.0</scale>
+      </LabelStyle>
+      <LineStyle>
+        <color>ffffffff</color>
+        <width>4</width>
+      </LineStyle>
+      <PolyStyle>
+        <color>660000ff</color>
+        <fill>1</fill>
+        <outline>1</outline>
+      </PolyStyle>
+    </Style>
+    <Style id="style_goto">
+      <IconStyle>
+        <color>ffffffff</color>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://HamsterTAK.github.io/Heenisteininu/pin_goto_v2.png</href>
+        </Icon>
+        <hotSpot x="0.5" y="0.04" xunits="fraction" yunits="fraction"/>
+      </IconStyle>
+      <LabelStyle>
+        <color>ffffffff</color>
+        <scale>1.0</scale>
+      </LabelStyle>
+      <LineStyle>
+        <color>ffffffff</color>
+        <width>4</width>
+      </LineStyle>
+      <PolyStyle>
+        <color>6600ffff</color>
+        <fill>1</fill>
+        <outline>1</outline>
+      </PolyStyle>
+    </Style>
+    <Style id="style_hold">
+      <IconStyle>
+        <color>ffffffff</color>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://HamsterTAK.github.io/Heenisteininu/pin_hold_v2.png</href>
+        </Icon>
+        <hotSpot x="0.5" y="0.28" xunits="fraction" yunits="fraction"/>
+      </IconStyle>
+      <LabelStyle>
+        <color>ffffffff</color>
+        <scale>1.0</scale>
+      </LabelStyle>
+      <LineStyle>
+        <color>ffffffff</color>
+        <width>4</width>
+      </LineStyle>
+      <PolyStyle>
+        <color>66ff00aa</color>
+        <fill>1</fill>
+        <outline>1</outline>
+      </PolyStyle>
+    </Style>
+    <Style id="style_briefing">
+      <IconStyle>
+        <color>ffffffff</color>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://HamsterTAK.github.io/Heenisteininu/pin_briefing_v2.png</href>
+        </Icon>
+        <hotSpot x="0.5" y="0.28" xunits="fraction" yunits="fraction"/>
+      </IconStyle>
+      <LabelStyle>
+        <color>ffffffff</color>
+        <scale>1.0</scale>
+      </LabelStyle>
+      <LineStyle>
+        <color>ffffffff</color>
+        <width>4</width>
+      </LineStyle>
+      <PolyStyle>
+        <color>6600aaff</color>
+        <fill>1</fill>
+        <outline>1</outline>
+      </PolyStyle>
+    </Style>
+    
     <Placemark>
       <name><![CDATA[動物親衛隊]]></name>
       <description><![CDATA[[Einsatz: IlhaHeenmosa]
@@ -11,6 +196,7 @@
 🎥 Live-Stream: <a href="https://jtmctrafficcctv2.gov.taipei:443/NVR/8076bdaf-ccbd-4c29-8f0c-7b2f166f15b8/live.m3u8">https://jtmctrafficcctv2.gov.taipei:443/NVR/8076bdaf-ccbd-4c29-8f0c-7b2f166f15b8/live.m3u8</a>
 Koord.: 51R UH 52553 65976 (25.00211, 121.53890)
 Stand: 27.10.2026, 18:21:26 (Stephanie)]]></description>
+      <styleUrl>#style_friendly</styleUrl>
       <Style>
         <IconStyle>
           <color>ffff0000</color>
@@ -35,6 +221,7 @@ Stand: 27.10.2026, 18:21:26 (Stephanie)]]></description>
 🎥 Live-Stream: <a href="https://cctv-ss03.thb.gov.tw:443/T9-23K+050">https://cctv-ss03.thb.gov.tw:443/T9-23K+050</a>
 Koord.: 51R UH 61055 60865 (24.95676, 121.62364)
 Stand: 27.10.2026, 19:23:14 (Stephanie)]]></description>
+      <styleUrl>#style_rescue</styleUrl>
       <Style>
         <IconStyle>
           <color>ff00ffff</color>
