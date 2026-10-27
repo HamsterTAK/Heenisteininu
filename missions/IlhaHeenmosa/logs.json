@@ -226,5 +226,11 @@
     "user": "Stephanie",
     "type": "action",
     "text": "Objekt „8“ erstellt [🟢✅ Auftrag erfüllt / Gesichert] (51R UH 36441 83750 (25.16091, 121.37718))"
+  },
+  {
+    "time": "28.10.2026, 06:01:18",
+    "user": "Stephanie",
+    "type": "action",
+    "text": "Objekt „9“ erstellt [🔴❌ Abgebrochen / Gescheitert] (51R UH 36545 83800 (25.16137, 121.37820))"
   }
 ]
