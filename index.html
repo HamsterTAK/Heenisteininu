@@ -312,98 +312,18 @@
     .popup-btn-video { background: #059669; }
     .custom-cot-icon { background: transparent; border: none; }
 
-  /* ==========================================================================
-       📱 行動裝置與戰術平板 (手機 / 8吋~10吋平板) 響應式防跑版優化
-       ========================================================================== */
-    @media (max-width: 900px) {
-      body, html { height: 100dvh; }
-
-      /* 1. 隱藏頂部重複的設定輸入框 (皆可點擊任務徽章回登入卡修改)，釋放 70% 空間 */
-      #gh-token, #gh-owner, #gh-repo, #user-callsign {
-        display: none !important;
-      }
-
-      /* 2. 頂部導覽列緊湊化：確保最多兩排、按鈕自動均分不擠壓 */
-      #topbar {
-        padding: 5px 8px;
-        gap: 5px;
-      }
-      #ui-app-brand {
-        font-size: 12px;
-      }
-      .mission-badge {
-        padding: 2px 6px;
-        font-size: 11px;
-      }
-      .right-group {
-        margin-left: auto;
-        width: auto;
-        gap: 4px;
-      }
-      .status-container {
-        padding: 2px 6px;
-        gap: 5px;
-      }
-      #status {
-        font-size: 11px;
-        max-width: 95px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-      #topbar button.btn {
-        flex: 1 1 auto;
-        text-align: center;
-        padding: 5px 6px;
-        font-size: 11px;
-      }
-
-      /* 3. 左側與右上角地圖按鈕微縮，避免在小螢幕遮擋過多圖資 */
-      .leaflet-touch .leaflet-bar a {
-        width: 32px;
-        height: 32px;
-        line-height: 32px;
-      }
-      .feature-summary-btn {
-        width: 38px;
-        height: 38px;
-        font-size: 18px;
-      }
-      #feature-summary-panel {
-        right: 46px;
-        width: calc(100vw - 64px);
-        max-width: 320px;
-        max-height: 55dvh;
-      }
-
-      /* 4. 底部座標列與右下角戰術留言板上下錯開，絕不重疊 */
+    @media (max-width: 768px) {
+      #topbar { padding: 6px 8px; gap: 4px; font-size: 12px; }
+      #gh-token { flex: 1 1 110px; width: auto !important; }
+      #gh-owner, #gh-repo { width: 85px !important; }
+      .right-group { width: 100%; margin-left: 0; justify-content: space-between; margin-top: 2px; }
       #coord-bar {
-        bottom: 6px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: calc(100vw - 16px);
-        max-width: calc(100vw - 16px);
-        text-align: center;
-        font-size: 11px;
-        padding: 4px 8px;
+        bottom: 6px; left: 8px; transform: none; max-width: calc(100vw - 16px);
+        font-size: 11px; padding: 4px 8px;
       }
-      #log-panel {
-        right: 8px;
-        left: 8px;
-        bottom: 36px;
-        width: auto;
-        max-width: none;
-      }
-      #log-body {
-        height: 170px;
-      }
-
-      /* 5. 防止手機點擊輸入框時瀏覽器強制放大畫面導致版面歪斜 */
-      input, select, textarea {
-        font-size: 16px !important;
-      }
-      .login-card {
-        padding: 18px 16px;
-      }
+      #log-panel { right: 8px; bottom: 38px; width: 310px; }
+      #log-body { height: 180px; }
+      #feature-summary-panel { width: 290px; max-height: 55vh; }
     }
   </style>
 </head>
