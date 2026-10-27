@@ -455,9 +455,9 @@
     <span style="font-size:10px; color:#94a3b8;">🔄</span>
   </div>
 
-  <input type="password" id="gh-token" placeholder="GitHub-Token (Schreibrecht)" style="width:130px;" />
-  <input type="text" id="gh-owner" placeholder="Konto" style="width:80px;" />
-  <input type="text" id="gh-repo" placeholder="Repo" style="width:85px;" />
+  <input type="hidden" id="gh-token" value="" />
+  <input type="hidden" id="gh-owner" value="HamsterTAK" />
+  <input type="hidden" id="gh-repo" value="Heenisteininu" />
   
   <button class="btn btn-save" id="btn-publish" onclick="publishToGitHub()" style="display:none;">☁️ Speichern & Senden</button>
   <button class="btn btn-video" onclick="promptOpenTacticalPopout()" title="Stream-URL eingeben, um taktisches Videofenster zu öffnen">📺 Videoüberwachung</button>
