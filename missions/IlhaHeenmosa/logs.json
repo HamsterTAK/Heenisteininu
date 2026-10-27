@@ -256,5 +256,17 @@
     "user": "Stephanie",
     "type": "action",
     "text": "Objekt „1“ gelöscht (51R UH 36101 83737 (25.16075, 121.37380))"
+  },
+  {
+    "time": "28.10.2026, 06:13:59",
+    "user": "Stephanie",
+    "type": "action",
+    "text": "Objekt „2“ gelöscht (51R UH 36201 83768 (25.16105, 121.37479))"
+  },
+  {
+    "time": "28.10.2026, 06:14:01",
+    "user": "Stephanie",
+    "type": "action",
+    "text": "Objekt „4“ gelöscht (51R UH 36400 83837 (25.16169, 121.37676))"
   }
 ]
