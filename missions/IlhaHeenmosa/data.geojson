@@ -1,4 +1,24 @@
 {
   "type": "FeatureCollection",
-  "features": []
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "動物親衛隊",
+        "category": "friendly",
+        "desc": "",
+        "stream": "https://jtmctrafficcctv2.gov.taipei:443/NVR/8076bdaf-ccbd-4c29-8f0c-7b2f166f15b8/live.m3u8",
+        "coord": "51R UH 52553 65976 (25.00211, 121.53890)",
+        "time": "27.10.2026, 18:21:26 (Stephanie)",
+        "updatedBy": "Stephanie"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.538905,
+          25.002108
+        ]
+      }
+    }
+  ]
 }
