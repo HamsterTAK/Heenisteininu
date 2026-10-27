@@ -268,5 +268,23 @@
     "user": "Stephanie",
     "type": "action",
     "text": "Objekt „4“ gelöscht (51R UH 36400 83837 (25.16169, 121.37676))"
+  },
+  {
+    "time": "28.10.2026, 06:14:01",
+    "user": "Stephanie",
+    "type": "action",
+    "text": "Objekt „3“ gelöscht (51R UH 36285 83800 (25.16135, 121.37562))"
+  },
+  {
+    "time": "28.10.2026, 06:14:02",
+    "user": "Stephanie",
+    "type": "action",
+    "text": "Objekt „5“ gelöscht (51R UH 36133 83627 (25.15976, 121.37413))"
+  },
+  {
+    "time": "28.10.2026, 06:14:03",
+    "user": "Stephanie",
+    "type": "action",
+    "text": "Objekt „6“ gelöscht (51R UH 36239 83660 (25.16007, 121.37518))"
   }
 ]
