@@ -38,6 +38,63 @@
           24.956764
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "OK",
+        "category": "completed",
+        "desc": "",
+        "stream": "",
+        "coord": "51R UH 51886 65881 (25.00119, 121.53231)",
+        "time": "28.10.2026, 03:36:53 (Stephanie)",
+        "updatedBy": "Stephanie"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.532307,
+          25.001188
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "NoGo",
+        "category": "aborted",
+        "desc": "",
+        "stream": "",
+        "coord": "51R UH 51932 65881 (25.00119, 121.53276)",
+        "time": "28.10.2026, 03:37:06 (Stephanie)",
+        "updatedBy": "Stephanie"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.532763,
+          25.001188
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Oct. 28",
+        "category": "briefing",
+        "desc": "Stephanie 今天要飛RJTT! 晚上可以回來吃Momo壽喜燒，請117定位!!",
+        "stream": "",
+        "coord": "51R UH 51800 65865 (25.00103, 121.53146)",
+        "time": "28.10.2026, 03:38:33 (Stephanie)",
+        "updatedBy": "Stephanie"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.531457,
+          25.001033
+        ]
+      }
     }
   ]
 }
