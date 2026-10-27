@@ -184,5 +184,11 @@
     "user": "Stephanie",
     "type": "action",
     "text": "Objekt „1“ erstellt [🔴 Gefahrenzone / Sperrgebiet] (51R UH 36100 83737 (25.16075, 121.37380))"
+  },
+  {
+    "time": "28.10.2026, 06:00:07",
+    "user": "Stephanie",
+    "type": "action",
+    "text": "Objekt „2“ erstellt [🟡 Rettungspunkt / Suchgebiet] (51R UH 36200 83768 (25.16105, 121.37479))"
   }
 ]
