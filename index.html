@@ -651,6 +651,8 @@
         <option value="goto">🟡⬇️ Angriffsziel / Vorrücken (Marschrichtung)</option>
         <option value="hold">🟣🛡️ Stellung halten / Sicherung (Verteidigung)</option>
         <option value="briefing">📜 Lagebrett / Einsatzbefehl (Briefing)</option>
+        <option value="completed">🟢✅ Auftrag erfüllt / Gesichert (Erledigt)</option>
+        <option value="aborted">🔴❌ Abgebrochen / Gescheitert (Abbruch)</option>
       </select>
     </div>
     <div class="form-group">
@@ -1018,6 +1020,8 @@
       { key: 'goto',     label: categoryConfig.goto.label,     color: '#facc15', items: [] },
       { key: 'hold',     label: categoryConfig.hold.label,     color: '#a855f7', items: [] },
       { key: 'briefing', label: categoryConfig.briefing.label, color: '#fbbf24', items: [] },
+      { key: 'completed', label: categoryConfig.completed.label, color: '#10b981', items: [] },
+      { key: 'aborted',   label: categoryConfig.aborted.label,   color: '#ef4444', items: [] },
       { key: 'shapes',   label: '⬠ Eingezeichnete Zonen & Routen', color: '#38bdf8', items: [] }
     ];
     const groupMap = {};
@@ -1369,12 +1373,44 @@
     return canvas.toDataURL('image/png').split(',')[1];
   }
 
+  function generateATAKCompletedBase64() {
+    const canvas = document.createElement('canvas');
+    canvas.width = 64; canvas.height = 96;
+    const ctx = canvas.getContext('2d');
+    ctx.beginPath();
+    ctx.arc(32, 69, 21, 0, Math.PI * 2);
+    ctx.fillStyle = '#10b981'; ctx.fill();
+    ctx.lineWidth = 3.5; ctx.strokeStyle = '#ffffff'; ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(21, 69);
+    ctx.lineTo(29, 77);
+    ctx.lineTo(44, 60);
+    ctx.lineWidth = 5.5; ctx.strokeStyle = '#ffffff';
+    ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.stroke();
+    return canvas.toDataURL('image/png').split(',')[1];
+  }
+
+  function generateATAKAbortedBase64() {
+    const canvas = document.createElement('canvas');
+    canvas.width = 64; canvas.height = 96;
+    const ctx = canvas.getContext('2d');
+    ctx.beginPath();
+    ctx.moveTo(16, 53); ctx.lineTo(48, 85);
+    ctx.moveTo(48, 53); ctx.lineTo(16, 85);
+    ctx.lineCap = 'round';
+    ctx.lineWidth = 12; ctx.strokeStyle = '#ffffff'; ctx.stroke();
+    ctx.lineWidth = 7.5; ctx.strokeStyle = '#ef4444'; ctx.stroke();
+    return canvas.toDataURL('image/png').split(',')[1];
+  }
+
   const ATAK_ICONS_BASE64 = {
     'google_pin.png': generateATAKWaterdropBase64(),
     'pin_casevac_v2.png': generateATAKCasevacBase64(),
     'pin_goto_v2.png': generateATAKGotoBase64(),
     'pin_hold_v2.png': generateATAKHoldBase64(),
-    'pin_briefing_v2.png': generateATAKBriefingBase64()
+    'pin_briefing_v2.png': generateATAKBriefingBase64(),
+    'pin_completed_v2.png': generateATAKCompletedBase64(),
+    'pin_aborted_v2.png': generateATAKAbortedBase64()
   };
 
   // 🎯 Rotes Fadenkreuz (ohne Außenring, mit präzisem Mittelpunkt [16, 16]) für Draw Marker
@@ -1401,8 +1437,10 @@
     friendly: { label: '🔵 Eigene Kräfte / Gefechtsstand',   webColor: '#3b82f6', kmlColor: 'ffff0000', kmlPolyColor: '66ff0000', kmlIconFile: 'google_pin.png',      hotSpotX: '0.5', hotSpotY: '0.04' },
     casevac:  { label: '⚪🔴 Verwundetennest / CASEVAC',      webColor: '#ef4444', kmlColor: 'ffffffff', kmlPolyColor: '660000ff', kmlIconFile: 'pin_casevac_v2.png',  hotSpotX: '0.5', hotSpotY: '0.28' },
     goto:     { label: '🟡⬇️ Angriffsziel / Vorrücken',       webColor: '#facc15', kmlColor: 'ffffffff', kmlPolyColor: '6600ffff', kmlIconFile: 'pin_goto_v2.png',     hotSpotX: '0.5', hotSpotY: '0.04' },
-    hold:     { label: '🟣🛡️ Stellung halten / Sicherung',    webColor: '#a855f7', kmlColor: 'ffffffff', kmlPolyColor: '66ff00aa', kmlIconFile: 'pin_hold_v2.png',     hotSpotX: '0.5', hotSpotY: '0.28' },
-    briefing: { label: '📜 Lagebrett / Einsatzbefehl',       webColor: '#fbbf24', kmlColor: 'ffffffff', kmlPolyColor: '6600aaff', kmlIconFile: 'pin_briefing_v2.png', hotSpotX: '0.5', hotSpotY: '0.28' }
+    hold:      { label: '🟣🛡️ Stellung halten / Sicherung',    webColor: '#a855f7', kmlColor: 'ffffffff', kmlPolyColor: '66ff00aa', kmlIconFile: 'pin_hold_v2.png',      hotSpotX: '0.5', hotSpotY: '0.28' },
+    briefing:  { label: '📜 Lagebrett / Einsatzbefehl',       webColor: '#fbbf24', kmlColor: 'ffffffff', kmlPolyColor: '6600aaff', kmlIconFile: 'pin_briefing_v2.png',  hotSpotX: '0.5', hotSpotY: '0.28' },
+    completed: { label: '🟢✅ Auftrag erfüllt / Gesichert',    webColor: '#10b981', kmlColor: 'ffffffff', kmlPolyColor: '6600ff00', kmlIconFile: 'pin_completed_v2.png', hotSpotX: '0.5', hotSpotY: '0.28' },
+    aborted:   { label: '🔴❌ Abgebrochen / Gescheitert',      webColor: '#ef4444', kmlColor: 'ffffffff', kmlPolyColor: '660000ff', kmlIconFile: 'pin_aborted_v2.png',   hotSpotX: '0.5', hotSpotY: '0.28' }
   };
 
   function createCoTDotIcon(cat) {
@@ -1429,6 +1467,14 @@
         <line x1="11" y1="12" x2="25" y2="12" stroke="#b45309" stroke-width="2" stroke-linecap="round"/>
         <line x1="11" y1="17" x2="25" y2="17" stroke="#b45309" stroke-width="2" stroke-linecap="round"/>
         <line x1="11" y1="22" x2="20" y2="22" stroke="#b45309" stroke-width="2" stroke-linecap="round"/>`;
+    } else if (cat === 'completed') {
+      innerSvg = `
+        <circle cx="18" cy="18" r="13.5" fill="#10b981" stroke="#ffffff" stroke-width="2.5"/>
+        <path d="M11 18l5 5 9-10" fill="none" stroke="#ffffff" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/>`;
+    } else if (cat === 'aborted') {
+      innerSvg = `
+        <path d="M9 9l18 18M27 9L9 27" fill="none" stroke="#ffffff" stroke-width="7.5" stroke-linecap="round"/>
+        <path d="M9 9l18 18M27 9L9 27" fill="none" stroke="#ef4444" stroke-width="4.5" stroke-linecap="round"/>`;
     } else {
       innerSvg = `
         <circle cx="18" cy="18" r="13.5" fill="${cfg.webColor}" stroke="#000000" stroke-width="2.5"/>
@@ -2451,7 +2497,7 @@
     const repo = document.getElementById('gh-repo').value.trim() || 'Heenisteininu';
     const baseUrl = `https://${owner}.github.io/${repo}`;
 
-    const allCats = ['danger', 'rescue', 'supply', 'friendly', 'casevac', 'goto', 'hold', 'briefing'];
+    const allCats = ['danger', 'rescue', 'supply', 'friendly', 'casevac', 'goto', 'hold', 'briefing', 'completed', 'aborted'];
     let sharedStyles = '';
     allCats.forEach(catKey => {
       const cCfg = categoryConfig[catKey] || categoryConfig.danger;
