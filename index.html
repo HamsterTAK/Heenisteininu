@@ -105,7 +105,7 @@
     .login-hint { margin-top: 12px; font-size: 11px; color: #64748b; text-align: left; background: #0f172a; padding: 10px; border-radius: 6px; line-height: 1.5; }
 
     /* ==========================================================================
-       Obere Navigationsleiste (Topbar)
+       Obere Navigationsleiste (Topbar + ATAK KML-Link Kopierfeld)
        ========================================================================== */
     #topbar {
       display: flex; flex-wrap: wrap; gap: 6px; align-items: center;
@@ -116,18 +116,30 @@
       padding: 4px 8px; border-radius: 4px; border: 1px solid #475569; font-size: 12px;
     }
     #topbar input, #topbar select { background: #0f172a; color: #fff; }
-    .mission-badge {
-      background: #0f172a; color: #00ffcc; border: 1px solid #00ffcc;
-      padding: 3px 7px; border-radius: 4px; font-family: monospace; font-weight: bold;
-      display: flex; align-items: center; gap: 5px; cursor: pointer; white-space: nowrap;
-      font-size: 12px;
+
+    /* Direktanzeige des ATAK-KML-Links für den aktuellen Einsatz */
+    .kml-link-badge {
+      background: #0f172a; color: #00ffcc; border: 1px solid #10b981;
+      padding: 3px 8px; border-radius: 4px; font-family: monospace; font-weight: bold;
+      display: inline-flex; align-items: center; gap: 6px; cursor: pointer; white-space: nowrap;
+      font-size: 11px; max-width: 330px; overflow: hidden; text-overflow: ellipsis;
+      transition: all 0.15s;
     }
+    .kml-link-badge:hover {
+      border-color: #00ffcc; background: #1e293b;
+      box-shadow: 0 0 8px rgba(0, 255, 204, 0.25);
+    }
+    #current-kml-url {
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+      color: #38bdf8;
+    }
+
     .btn { cursor: pointer; font-weight: 600; border: none !important; color: white; transition: opacity 0.2s; white-space: nowrap; }
     .btn:hover:not(:disabled) { opacity: 0.9; }
     .btn-save { background: #ef4444; }
     .btn-atak { background: #3b82f6; }
     .btn-video { background: #059669; }
-    .btn-manage { background: #0284c7; display: none; }
+    .btn-manage { background: #0284c7; }
     .btn-del-mission { background: #7f1d1d; color: #fecaca; display: none; }
     .btn-del-mission:hover { background: #dc2626; color: #fff; }
 
@@ -312,14 +324,14 @@
     .popup-btn-video { background: #059669; }
     .custom-cot-icon { background: transparent; border: none; }
 
-  /* ==========================================================================
+    /* ==========================================================================
        📱 行動裝置與戰術平板 (手機 / 8吋~10吋平板) 響應式防跑版優化 (Heenisteininu)
        ========================================================================== */
     @media (max-width: 900px) {
       body, html { height: 100dvh; }
 
-      /* 1. 自動隱藏頂部重複的 Token / Konto / Repo / Rufzeichen 輸入框 (點 Einsatz 徽章即可修改) */
-      #gh-token, #gh-owner, #gh-repo, #user-callsign {
+      /* 1. 自動隱藏頂部 Rufzeichen 輸入框 (點 Einsätze 即可回登入卡修改) */
+      #user-callsign {
         display: none !important;
       }
 
@@ -332,9 +344,10 @@
         font-size: 12px;
         white-space: nowrap;
       }
-      .mission-badge {
+      .kml-link-badge {
         padding: 2px 6px;
-        font-size: 11px;
+        font-size: 10px;
+        max-width: 155px;
       }
       .right-group {
         margin-left: auto;
@@ -449,19 +462,22 @@
 
 <div id="topbar">
   <strong>🐶 Heen</strong>
-  <div class="mission-badge" onclick="switchMissionPrompt()" title="Klicken, um den Einsatz zu wechseln oder zu verwalten">
-    <span>🎯 Einsatz:</span>
-    <span id="current-mission-label">Nicht angemeldet</span>
-    <span style="font-size:10px; color:#94a3b8;">🔄</span>
+
+  <!-- Direktanzeige des ATAK-KML-Links für den aktuellen Einsatz (Klicken zum Kopieren) -->
+  <div class="kml-link-badge" onclick="copyCurrentMissionKml()" id="ui-kml-badge" title="Klicken, um die ATAK-KML-Abo-URL für diesen Einsatz zu kopieren">
+    <span>📲 ATAK KML:</span>
+    <span id="current-kml-url">Kein Einsatz geladen</span>
+    <span style="font-size:11px;">📋</span>
   </div>
 
+  <!-- Versteckte Systemfelder für GitHub-Konfiguration -->
   <input type="hidden" id="gh-token" value="" />
   <input type="hidden" id="gh-owner" value="HamsterTAK" />
   <input type="hidden" id="gh-repo" value="Heenisteininu" />
   
   <button class="btn btn-save" id="btn-publish" onclick="publishToGitHub()" style="display:none;">☁️ Speichern & Senden</button>
   <button class="btn btn-video" onclick="promptOpenTacticalPopout()" title="Stream-URL eingeben, um taktisches Videofenster zu öffnen">📺 Videoüberwachung</button>
-  <button class="btn btn-manage" id="btn-top-manage" onclick="openMissionManagerModal()" title="Cloud-Einsatzverwaltung öffnen">🗂️ Einsätze</button>
+  <button class="btn btn-manage" id="btn-top-manage" onclick="openMissionManagerModal()" title="Einsatz wechseln oder Cloud-Einsatzverwaltung öffnen">🗂️ Einsätze</button>
   <button class="btn btn-del-mission" id="btn-delete-mission" onclick="deleteMissionByCode(currentMissionCode)" title="Diesen Einsatz samt aller Dateien unwiderruflich aus der Cloud löschen">💣 Einsatz löschen</button>
   
   <div class="right-group">
@@ -547,6 +563,12 @@
   let currentMissionCode = '';
   let isTokenVerified = false;
 
+  // Hintergrund-Synchronisationsvariablen (0 API-Verbrauch + Überschreibschutz)
+  let lastKnownGeoJsonFingerprint = '';
+  let lastKnownLogsFingerprint = '';
+  let hasUnsavedMapChanges = false;
+  let lastCloudWriteTimestamp = 0;
+
   function setSystemStatus(text, ledState = 'ok') {
     const statusEl = document.getElementById('status');
     const ledEl = document.getElementById('status-led');
@@ -557,6 +579,31 @@
       else if (ledState === 'error') ledEl.classList.add('error');
     }
   }
+
+  // Aktualisiert die ATAK-KML-Link-Anzeige oben links in der Topbar
+  function updateTopbarKmlUrlDisplay() {
+    const kmlEl = document.getElementById('current-kml-url');
+    const badgeEl = document.getElementById('ui-kml-badge');
+    if (!kmlEl) return;
+    if (!currentMissionCode) {
+      kmlEl.innerText = 'Kein Einsatz geladen';
+      if (badgeEl) badgeEl.title = '';
+      return;
+    }
+    const owner = document.getElementById('gh-owner').value.trim() || 'HamsterTAK';
+    const repo = document.getElementById('gh-repo').value.trim() || 'Heenisteininu';
+    const fullKmlUrl = `https://${owner}.github.io/${repo}/missions/${currentMissionCode}/live.kml`;
+    kmlEl.innerText = fullKmlUrl;
+    if (badgeEl) badgeEl.title = `Klicken, um die ATAK-KML-Abo-URL für diesen Einsatz zu kopieren:\n${fullKmlUrl}`;
+  }
+
+  window.copyCurrentMissionKml = function() {
+    if (!currentMissionCode) {
+      alert('Bitte zuerst mit einem Einsatzcode anmelden!');
+      return;
+    }
+    copyMissionKmlUrl(currentMissionCode);
+  };
 
   function injectCustomToolbarIcons() {
     const undoIconEl = document.querySelector('.leaflet-pm-icon-undo');
@@ -678,7 +725,7 @@
   // ============================================================================
   const map = L.map('map', { maxZoom: 22 }).setView([25.002, 121.533], 16);
 
- function adjustMapHeight() {
+  function adjustMapHeight() {
     const topbar = document.getElementById('topbar');
     const mapEl = document.getElementById('map');
     if (topbar && mapEl) {
@@ -1239,7 +1286,7 @@
 
   window.openMissionManagerModal = async function() {
     const exited = await switchMissionPrompt();
-    if (exited) {
+    if (exited && isTokenVerified) {
       loadMissionDirectoryList();
     }
   };
@@ -1251,13 +1298,16 @@
     const newUrl = `${window.location.pathname}?mission=${encodeURIComponent(currentMissionCode)}`;
     window.history.replaceState({}, '', newUrl);
 
-    document.getElementById('current-mission-label').innerText = currentMissionCode;
+    updateTopbarKmlUrlDisplay();
     document.getElementById('mission-login-overlay').style.display = 'none';
     adjustMapHeight();
 
     drawnItems.clearLayers();
     undoStack = [];
     tacticalLogs = [];
+    lastKnownGeoJsonFingerprint = '';
+    lastKnownLogsFingerprint = '';
+    hasUnsavedMapChanges = false;
     cleanAndRefreshUndoUI();
     renderFeatureSummaryList();
 
@@ -1324,6 +1374,7 @@
       if (currentMissionCode === targetCode) {
         localStorage.removeItem('hamster_last_mission');
         currentMissionCode = '';
+        updateTopbarKmlUrlDisplay();
         document.getElementById('login-mission-code').value = '';
         document.getElementById('mission-login-overlay').style.display = 'flex';
         setSystemStatus('Einsatzbereit', 'ok');
@@ -1398,13 +1449,11 @@
     const inputArea = document.getElementById('log-input-area');
     const clearBtn = document.getElementById('btn-clear-logs');
     const publishBtn = document.getElementById('btn-publish');
-    const topManageBtn = document.getElementById('btn-top-manage');
     const delMissionBtn = document.getElementById('btn-delete-mission');
 
     if (verified) {
       document.body.classList.remove('readonly-mode');
       publishBtn.style.display = 'inline-block';
-      topManageBtn.style.display = 'inline-block';
       delMissionBtn.style.display = 'inline-block';
       lockIcon.innerText = '📋';
       lockedMsg.style.display = 'none';
@@ -1415,7 +1464,6 @@
     } else {
       document.body.classList.add('readonly-mode');
       publishBtn.style.display = 'none';
-      topManageBtn.style.display = 'none';
       delMissionBtn.style.display = 'none';
       lockIcon.innerText = '🔒';
       lockedMsg.style.display = 'flex';
@@ -1501,6 +1549,7 @@
         const parsed = JSON.parse(decoded);
         if (Array.isArray(parsed)) {
           tacticalLogs = parsed;
+          lastKnownLogsFingerprint = JSON.stringify(parsed);
           renderLogList();
         }
       }
@@ -1520,13 +1569,18 @@
       const logsStr = JSON.stringify(tacticalLogs, null, 2);
       const msg = customMsg || `Tagebuch aktualisiert: ${currentMissionCode} (${getCurrentCallsign()})`;
       await putGitHubFile(owner, repo, getMissionFilePath('logs.json'), logsStr, token, msg);
+      lastKnownLogsFingerprint = JSON.stringify(tacticalLogs);
+      lastCloudWriteTimestamp = Date.now();
     } catch (e) {} finally {
       isSyncingLogs = false;
     }
   }
 
   ['gh-token', 'gh-owner', 'gh-repo'].forEach(id => {
-    document.getElementById(id).addEventListener('change', () => verifyGitHubToken());
+    document.getElementById(id).addEventListener('change', () => {
+      updateTopbarKmlUrlDisplay();
+      verifyGitHubToken();
+    });
   });
 
   // ============================================================================
@@ -1556,6 +1610,7 @@
   setInterval(cleanAndRefreshUndoUI, 1000);
 
   function recordUndoSnapshot(extraRemovedLayer = null) {
+    hasUnsavedMapChanges = true;
     cleanAndRefreshUndoUI();
     const collection = collectGeoJSON();
     if (extraRemovedLayer && extraRemovedLayer.feature && (extraRemovedLayer instanceof L.Marker || extraRemovedLayer instanceof L.Path)) {
@@ -1575,6 +1630,7 @@
     if (!isTokenVerified) return;
     cleanAndRefreshUndoUI();
     if (undoStack.length === 0) return;
+    hasUnsavedMapChanges = true;
     const lastSnapshot = undoStack.pop();
     const geojson = JSON.parse(lastSnapshot.geojsonStr);
     drawnItems.clearLayers();
@@ -1873,6 +1929,7 @@
     const queryMission = sanitizeMissionCode(urlParams.get('mission') || '');
     document.getElementById('login-mission-code').value = queryMission || savedMission;
 
+    updateTopbarKmlUrlDisplay();
     updateMGRSGrid();
     adjustMapHeight();
     setTimeout(() => document.getElementById('login-mission-code').focus(), 150);
@@ -1900,10 +1957,14 @@
       }
 
       if (!geojson) {
+        lastKnownGeoJsonFingerprint = JSON.stringify({ type: 'FeatureCollection', features: [] });
         renderFeatureSummaryList();
         setSystemStatus(`Aktiv [${currentMissionCode}]`, 'ok');
         return;
       }
+
+      lastKnownGeoJsonFingerprint = JSON.stringify(geojson);
+      lastCloudWriteTimestamp = Date.now();
 
       L.geoJSON(geojson, {
         onEachFeature: (feature, layer) => {
@@ -2132,6 +2193,11 @@
       await putGitHubFile(owner, repo, getMissionFilePath('live.kml'), kmlStr, token, `[${currentMissionCode}] ATAK-KML aktualisiert (${timeStr}${byWho})`);
       await putGitHubFile(owner, repo, getMissionFilePath('logs.json'), logsStr, token, `[${currentMissionCode}] Einsatztagebuch aktualisiert (${timeStr}${byWho})`);
 
+      hasUnsavedMapChanges = false;
+      lastKnownGeoJsonFingerprint = JSON.stringify(collection);
+      lastKnownLogsFingerprint = JSON.stringify(tacticalLogs);
+      lastCloudWriteTimestamp = Date.now();
+
       const missionKmlUrl = `https://${owner}.github.io/${repo}/${getMissionFilePath('live.kml')}`;
       setSystemStatus(`[${currentMissionCode}] (${timeStr})`, 'ok');
       alert(`🟢 Einsatz 【${currentMissionCode}】 erfolgreich veröffentlicht!\n\nATAK-Abonnement-URL für diesen Einsatz:\n${missionKmlUrl}`);
@@ -2140,6 +2206,87 @@
       alert('Speichern fehlgeschlagen: ' + err.message);
     }
   }
+
+  // ============================================================================
+  // 11. Taktische Hintergrund-Synchronisation (0 API-Verbrauch + Überschreibschutz)
+  // ============================================================================
+  async function pollTacticalCloudUpdates() {
+    if (!currentMissionCode) return;
+    const isLoginOpen = document.getElementById('mission-login-overlay').style.display !== 'none';
+    if (isLoginOpen) return;
+
+    // 65 Sekunden Abkühlzeit nach eigenem Cloud-Write (verhindert Reversion durch CDN-Cache-Latenz)
+    if (Date.now() - lastCloudWriteTimestamp < 65000) return;
+
+    const owner = document.getElementById('gh-owner').value.trim() || 'HamsterTAK';
+    const repo = document.getElementById('gh-repo').value.trim() || 'Heenisteininu';
+    const ts = Date.now();
+
+    const isModalOpen = document.getElementById('modal-overlay').style.display === 'flex';
+    const isDrawingOrEditing = Boolean(
+      map.pm && (
+        map.pm.globalDrawModeEnabled() ||
+        map.pm.globalEditModeEnabled() ||
+        map.pm.globalDragModeEnabled() ||
+        map.pm.globalRemovalModeEnabled() ||
+        map.pm.globalRotateModeEnabled()
+      )
+    );
+    const isChatInputFocused = (document.activeElement && document.activeElement.id === 'log-input');
+
+    // [Kartendaten-Sync]: Nur aktualisieren, wenn kein Modal offen ist, nicht gezeichnet wird und keine ungespeicherten Änderungen vorliegen
+    if (!isModalOpen && !isDrawingOrEditing && !hasUnsavedMapChanges) {
+      try {
+        const geoRes = await fetch(`https://${owner}.github.io/${repo}/missions/${currentMissionCode}/data.geojson?t=${ts}`, { cache: 'no-store' });
+        if (geoRes.ok) {
+          const parsed = await geoRes.json();
+          if (parsed && parsed.type === 'FeatureCollection') {
+            const newFingerprint = JSON.stringify(parsed);
+            if (lastKnownGeoJsonFingerprint && newFingerprint !== lastKnownGeoJsonFingerprint) {
+              lastKnownGeoJsonFingerprint = newFingerprint;
+
+              drawnItems.clearLayers();
+              L.geoJSON(parsed, {
+                onEachFeature: (feature, layer) => {
+                  drawnItems.addLayer(layer);
+                  applyFeatureProperties(layer, feature.properties || {});
+                }
+              });
+              renderFeatureSummaryList();
+
+              setSystemStatus(`[${currentMissionCode}] 🔄 SYNC`, 'busy');
+              setTimeout(() => setSystemStatus(`Aktiv [${currentMissionCode}]`, 'ok'), 1200);
+            } else if (!lastKnownGeoJsonFingerprint) {
+              lastKnownGeoJsonFingerprint = newFingerprint;
+            }
+          }
+        }
+      } catch (e) {}
+    }
+
+    // [Einsatztagebuch-Sync]: Nur aktualisieren, wenn Offiziers-Token aktiv und Eingabefeld nicht fokussiert
+    if (isTokenVerified && !isChatInputFocused) {
+      try {
+        const logRes = await fetch(`https://${owner}.github.io/${repo}/missions/${currentMissionCode}/logs.json?t=${ts}`, { cache: 'no-store' });
+        if (logRes.ok) {
+          const newLogs = await logRes.json();
+          if (Array.isArray(newLogs)) {
+            const newLogFp = JSON.stringify(newLogs);
+            if (lastKnownLogsFingerprint && newLogFp !== lastKnownLogsFingerprint) {
+              lastKnownLogsFingerprint = newLogFp;
+              tacticalLogs = newLogs;
+              renderLogList();
+            } else if (!lastKnownLogsFingerprint) {
+              lastKnownLogsFingerprint = newLogFp;
+            }
+          }
+        }
+      } catch (e) {}
+    }
+  }
+
+  // Alle 15 Sekunden statischen CDN-Cache im Hintergrund prüfen (0 GitHub-API-Verbrauch)
+  setInterval(pollTacticalCloudUpdates, 15000);
 </script>
 </body>
 </html>
