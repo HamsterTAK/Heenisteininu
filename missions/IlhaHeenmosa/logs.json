@@ -190,5 +190,11 @@
     "user": "Stephanie",
     "type": "action",
     "text": "Objekt „2“ erstellt [🟡 Rettungspunkt / Suchgebiet] (51R UH 36200 83768 (25.16105, 121.37479))"
+  },
+  {
+    "time": "28.10.2026, 06:00:17",
+    "user": "Stephanie",
+    "type": "action",
+    "text": "Objekt „3“ erstellt [🟢 Versorgungspunkt / Sicherheit] (51R UH 36285 83800 (25.16135, 121.37562))"
   }
 ]
