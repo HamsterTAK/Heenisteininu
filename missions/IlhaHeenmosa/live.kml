@@ -187,6 +187,52 @@
         <outline>1</outline>
       </PolyStyle>
     </Style>
+    <Style id="style_completed">
+      <IconStyle>
+        <color>ffffffff</color>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://HamsterTAK.github.io/Heenisteininu/pin_completed_v2.png</href>
+        </Icon>
+        <hotSpot x="0.5" y="0.28" xunits="fraction" yunits="fraction"/>
+      </IconStyle>
+      <LabelStyle>
+        <color>ffffffff</color>
+        <scale>1.0</scale>
+      </LabelStyle>
+      <LineStyle>
+        <color>ffffffff</color>
+        <width>4</width>
+      </LineStyle>
+      <PolyStyle>
+        <color>6600ff00</color>
+        <fill>1</fill>
+        <outline>1</outline>
+      </PolyStyle>
+    </Style>
+    <Style id="style_aborted">
+      <IconStyle>
+        <color>ffffffff</color>
+        <scale>1.1</scale>
+        <Icon>
+          <href>https://HamsterTAK.github.io/Heenisteininu/pin_aborted_v2.png</href>
+        </Icon>
+        <hotSpot x="0.5" y="0.28" xunits="fraction" yunits="fraction"/>
+      </IconStyle>
+      <LabelStyle>
+        <color>ffffffff</color>
+        <scale>1.0</scale>
+      </LabelStyle>
+      <LineStyle>
+        <color>ffffffff</color>
+        <width>4</width>
+      </LineStyle>
+      <PolyStyle>
+        <color>660000ff</color>
+        <fill>1</fill>
+        <outline>1</outline>
+      </PolyStyle>
+    </Style>
     
     <Placemark>
       <name><![CDATA[動物親衛隊]]></name>
@@ -237,6 +283,78 @@ Stand: 27.10.2026, 19:23:14 (Stephanie)]]></description>
         </LabelStyle>
       </Style>
       <Point><coordinates>121.623641,24.956764,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[OK]]></name>
+      <description><![CDATA[[Einsatz: IlhaHeenmosa]
+[Kategorie: 🟢✅ Auftrag erfüllt / Gesichert]
+
+Koord.: 51R UH 51886 65881 (25.00119, 121.53231)
+Stand: 28.10.2026, 03:36:53 (Stephanie)]]></description>
+      <styleUrl>#style_completed</styleUrl>
+      <Style>
+        <IconStyle>
+          <color>ffffffff</color>
+          <scale>1.1</scale>
+          <Icon>
+            <href>https://HamsterTAK.github.io/Heenisteininu/pin_completed_v2.png</href>
+          </Icon>
+          <hotSpot x="0.5" y="0.28" xunits="fraction" yunits="fraction"/>
+        </IconStyle>
+        <LabelStyle>
+          <color>ffffffff</color>
+          <scale>1.0</scale>
+        </LabelStyle>
+      </Style>
+      <Point><coordinates>121.532307,25.001188,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[NoGo]]></name>
+      <description><![CDATA[[Einsatz: IlhaHeenmosa]
+[Kategorie: 🔴❌ Abgebrochen / Gescheitert]
+
+Koord.: 51R UH 51932 65881 (25.00119, 121.53276)
+Stand: 28.10.2026, 03:37:06 (Stephanie)]]></description>
+      <styleUrl>#style_aborted</styleUrl>
+      <Style>
+        <IconStyle>
+          <color>ffffffff</color>
+          <scale>1.1</scale>
+          <Icon>
+            <href>https://HamsterTAK.github.io/Heenisteininu/pin_aborted_v2.png</href>
+          </Icon>
+          <hotSpot x="0.5" y="0.28" xunits="fraction" yunits="fraction"/>
+        </IconStyle>
+        <LabelStyle>
+          <color>ffffffff</color>
+          <scale>1.0</scale>
+        </LabelStyle>
+      </Style>
+      <Point><coordinates>121.532763,25.001188,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name><![CDATA[Oct. 28]]></name>
+      <description><![CDATA[[Einsatz: IlhaHeenmosa]
+[Kategorie: 📜 Lagebrett / Einsatzbefehl]
+Stephanie 今天要飛RJTT! 晚上可以回來吃Momo壽喜燒，請117定位!!
+Koord.: 51R UH 51800 65865 (25.00103, 121.53146)
+Stand: 28.10.2026, 03:38:33 (Stephanie)]]></description>
+      <styleUrl>#style_briefing</styleUrl>
+      <Style>
+        <IconStyle>
+          <color>ffffffff</color>
+          <scale>1.1</scale>
+          <Icon>
+            <href>https://HamsterTAK.github.io/Heenisteininu/pin_briefing_v2.png</href>
+          </Icon>
+          <hotSpot x="0.5" y="0.28" xunits="fraction" yunits="fraction"/>
+        </IconStyle>
+        <LabelStyle>
+          <color>ffffffff</color>
+          <scale>1.0</scale>
+        </LabelStyle>
+      </Style>
+      <Point><coordinates>121.531457,25.001033,0</coordinates></Point>
     </Placemark>
   </Document>
 </kml>
