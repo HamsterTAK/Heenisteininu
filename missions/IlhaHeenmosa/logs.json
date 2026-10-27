@@ -142,5 +142,11 @@
     "user": "Stephanie",
     "type": "action",
     "text": "Objekt „OK“ erstellt [🟢✅ Auftrag erfüllt / Gesichert] (51R UH 51886 65881 (25.00119, 121.53231))"
+  },
+  {
+    "time": "28.10.2026, 03:37:06",
+    "user": "Stephanie",
+    "type": "action",
+    "text": "Objekt „NoGo“ erstellt [🔴❌ Abgebrochen / Gescheitert] (51R UH 51932 65881 (25.00119, 121.53276))"
   }
 ]
