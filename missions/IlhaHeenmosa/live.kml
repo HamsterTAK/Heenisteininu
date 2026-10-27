@@ -51,5 +51,25 @@ Stand: 27.10.2026, 19:23:14 (Stephanie)]]></description>
       </Style>
       <Point><coordinates>121.623641,24.956764,0</coordinates></Point>
     </Placemark>
+    <Placemark>
+      <name><![CDATA[邪惡祭壇]]></name>
+      <description><![CDATA[[Einsatz: IlhaHeenmosa]
+[Kategorie: 🔴 Gefahrenzone / Sperrgebiet]
+
+Koord.: 51R UH 51915 65699 (24.99955, 121.53261)
+Stand: 27.10.2026, 19:26:46 (Stephanie)]]></description>
+      <Style>
+        <LineStyle>
+          <color>ff0000ff</color>
+          <width>4</width>
+        </LineStyle>
+        <PolyStyle>
+          <color>660000ff</color>
+          <fill>1</fill>
+          <outline>1</outline>
+        </PolyStyle>
+      </Style>
+      <Polygon><tessellate>1</tessellate><outerBoundaryIs><LinearRing><coordinates>121.531222,24.999546,0 121.531245,25.000196,0 121.532276,25.001362,0 121.5328,25.001576,0 121.533438,25.001079,0 121.533831,25.000474,0 121.533948,25.00007,0 121.534045,24.999573,0 121.534013,24.999147,0 121.533927,24.998669,0 121.533798,24.998272,0 121.532983,24.99799,0 121.53221,24.99775,0 121.531499,24.997524,0 121.531169,24.998185,0 121.531222,24.999546,0</coordinates></LinearRing></outerBoundaryIs></Polygon>
+    </Placemark>
   </Document>
 </kml>
