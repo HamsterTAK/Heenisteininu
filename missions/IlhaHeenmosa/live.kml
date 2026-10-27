@@ -27,5 +27,29 @@ Stand: 27.10.2026, 18:21:26 (Stephanie)]]></description>
       </Style>
       <Point><coordinates>121.538905,25.002108,0</coordinates></Point>
     </Placemark>
+    <Placemark>
+      <name><![CDATA[文山藥園]]></name>
+      <description><![CDATA[[Einsatz: IlhaHeenmosa]
+[Kategorie: 🟡 Rettungspunkt / Suchgebiet]
+
+🎥 Live-Stream: <a href="https://cctv-ss03.thb.gov.tw:443/T9-23K+050">https://cctv-ss03.thb.gov.tw:443/T9-23K+050</a>
+Koord.: 51R UH 61055 60865 (24.95676, 121.62364)
+Stand: 27.10.2026, 19:23:14 (Stephanie)]]></description>
+      <Style>
+        <IconStyle>
+          <color>ff00ffff</color>
+          <scale>1.1</scale>
+          <Icon>
+            <href>https://HamsterTAK.github.io/Heenisteininu/google_pin.png</href>
+          </Icon>
+          <hotSpot x="0.5" y="0.04" xunits="fraction" yunits="fraction"/>
+        </IconStyle>
+        <LabelStyle>
+          <color>ffffffff</color>
+          <scale>1.0</scale>
+        </LabelStyle>
+      </Style>
+      <Point><coordinates>121.623641,24.956764,0</coordinates></Point>
+    </Placemark>
   </Document>
 </kml>
