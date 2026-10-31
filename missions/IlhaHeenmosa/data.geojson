@@ -19,25 +19,6 @@
           25.002108
         ]
       }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "洋流",
-        "category": "goto",
-        "desc": "",
-        "stream": "https://jtmctrafficcctv2.gov.taipei/NVR/b5845168-1f98-4f98-879a-e98f0168495c/live.m3u8",
-        "coord": "51R UH 48700 69057 (25.02954, 121.50040)",
-        "time": "31.10.2026, 18:11:22 (Stephanie)",
-        "updatedBy": "Stephanie"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          121.500397,
-          25.029542
-        ]
-      }
     }
   ]
 }
