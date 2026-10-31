@@ -259,5 +259,30 @@ Stand: 27.10.2026, 18:21:26 (Stephanie)]]></description>
       </Style>
       <Point><coordinates>121.538905,25.002108,0</coordinates></Point>
     </Placemark>
+    <Placemark>
+      <name><![CDATA[洋流]]></name>
+      <description><![CDATA[[Einsatz: IlhaHeenmosa]
+[Kategorie: 🟡⬇️ Angriffsziel / Vorrücken]
+
+🎥 Live-Stream: <a href="https://jtmctrafficcctv2.gov.taipei/NVR/b5845168-1f98-4f98-879a-e98f0168495c/live.m3u8">https://jtmctrafficcctv2.gov.taipei/NVR/b5845168-1f98-4f98-879a-e98f0168495c/live.m3u8</a>
+Koord.: 51R UH 48700 69057 (25.02954, 121.50040)
+Stand: 31.10.2026, 18:11:22 (Stephanie)]]></description>
+      <styleUrl>#style_goto</styleUrl>
+      <Style>
+        <IconStyle>
+          <color>ffffffff</color>
+          <scale>1.1</scale>
+          <Icon>
+            <href>https://HamsterTAK.github.io/Heenisteininu/pin_goto_v2.png</href>
+          </Icon>
+          <hotSpot x="0.5" y="0.04" xunits="fraction" yunits="fraction"/>
+        </IconStyle>
+        <LabelStyle>
+          <color>ffffffff</color>
+          <scale>1.0</scale>
+        </LabelStyle>
+      </Style>
+      <Point><coordinates>121.500397,25.029542,0</coordinates></Point>
+    </Placemark>
   </Document>
 </kml>
