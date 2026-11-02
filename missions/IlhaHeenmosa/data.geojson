@@ -19,25 +19,6 @@
           25.002108
         ]
       }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "微笑狗",
-        "category": "friendly",
-        "desc": "",
-        "stream": "",
-        "coord": "51R UH 51996 65853 (25.00094, 121.53340)",
-        "time": "3.11.2026, 04:28:57 (Stephanie)",
-        "updatedBy": "Stephanie"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          121.533396,
-          25.000941
-        ]
-      }
     }
   ]
 }
