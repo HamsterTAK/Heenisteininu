@@ -259,29 +259,5 @@ Stand: 27.10.2026, 18:21:26 (Stephanie)]]></description>
       </Style>
       <Point><coordinates>121.538905,25.002108,0</coordinates></Point>
     </Placemark>
-    <Placemark>
-      <name><![CDATA[微笑狗]]></name>
-      <description><![CDATA[[Einsatz: IlhaHeenmosa]
-[Kategorie: 🔵 Eigene Kräfte / Gefechtsstand]
-
-Koord.: 51R UH 51996 65853 (25.00094, 121.53340)
-Stand: 3.11.2026, 04:28:57 (Stephanie)]]></description>
-      <styleUrl>#style_friendly</styleUrl>
-      <Style>
-        <IconStyle>
-          <color>ffff0000</color>
-          <scale>1.1</scale>
-          <Icon>
-            <href>https://HamsterTAK.github.io/Heenisteininu/google_pin.png</href>
-          </Icon>
-          <hotSpot x="0.5" y="0.04" xunits="fraction" yunits="fraction"/>
-        </IconStyle>
-        <LabelStyle>
-          <color>ffffffff</color>
-          <scale>1.0</scale>
-        </LabelStyle>
-      </Style>
-      <Point><coordinates>121.533396,25.000941,0</coordinates></Point>
-    </Placemark>
   </Document>
 </kml>
