@@ -902,7 +902,7 @@
     maxZoom: 22, maxNativeZoom: 19, attribution: '© NLSC Orthofoto'
   });
 
-  const mgrsGridGroup = L.layerGroup().addTo(map);
+  const mgrsGridGroup = L.layerGroup([], { pmIgnore: true }).addTo(map);
 
   // 🗺️ OpenTopoMap steht ganz oben in der Liste!
   const baseMaps = {
@@ -1197,12 +1197,12 @@
         if (e > 99999) continue;
         try {
           const p1 = mgrsToLatLng(e, startN), p2 = mgrsToLatLng(e, Math.min(99999, endN + step));
-          L.polyline([p1, p2], { color: '#2563eb', weight: 1.6, opacity: 0.75, interactive: false }).addTo(mgrsGridGroup);
+          L.polyline([p1, p2], { color: '#2563eb', weight: 1.6, opacity: 0.75, interactive: false, pmIgnore: true, snapIgnore: true }).addTo(mgrsGridGroup);
           const topLat = bounds.getNorth() - (bounds.getNorth() - bounds.getSouth()) * 0.06;
           const lonAtLine = p1[1] + (p2[1] - p1[1]) * 0.5;
           if (lonAtLine >= bounds.getWest() && lonAtLine <= bounds.getEast()) {
             L.marker([topLat, lonAtLine], {
-              interactive: false,
+              interactive: false, pmIgnore: true, snapIgnore: true,
               icon: L.divIcon({ className: '', html: `<span class="mgrs-grid-label">${formatGridLabel(e)}</span>`, iconAnchor: [22, 10] })
             }).addTo(mgrsGridGroup);
           }
@@ -1213,12 +1213,12 @@
         if (n > 99999) continue;
         try {
           const p1 = mgrsToLatLng(startE, n), p2 = mgrsToLatLng(Math.min(99999, endE + step), n);
-          L.polyline([p1, p2], { color: '#2563eb', weight: 1.6, opacity: 0.75, interactive: false }).addTo(mgrsGridGroup);
+          L.polyline([p1, p2], { color: '#2563eb', weight: 1.6, opacity: 0.75, interactive: false, pmIgnore: true, snapIgnore: true }).addTo(mgrsGridGroup);
           const leftLng = bounds.getWest() + (bounds.getEast() - bounds.getWest()) * 0.04;
           const latAtLine = p1[0] + (p2[0] - p1[0]) * 0.5;
           if (latAtLine >= bounds.getSouth() && latAtLine <= bounds.getNorth()) {
             L.marker([latAtLine, leftLng], {
-              interactive: false,
+              interactive: false, pmIgnore: true, snapIgnore: true,
               icon: L.divIcon({ className: '', html: `<span class="mgrs-grid-label">${formatGridLabel(n)}</span>`, iconAnchor: [0, 10] })
             }).addTo(mgrsGridGroup);
           }
@@ -2055,7 +2055,9 @@
     drawCircle: false, drawCircleMarker: false, drawText: false,
     editMode: true, dragMode: true, cutPolygon: false, removalMode: true, rotateMode: true
   });
+  map.pm.setGlobalOptions({ snappable: false, snapDistance: 15 });
 
+  
   try {
     map.pm.Draw.Marker.setOptions({ markerStyle: { icon: TACTICAL_CROSSHAIR_ICON } });
   } catch (e) {}
