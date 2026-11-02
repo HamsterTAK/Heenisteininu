@@ -252,36 +252,15 @@
       border-radius: 4px; border: 1px solid #334155; font-weight: normal;
     }
 
-    #bottom-coord-container {
-      position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%);
-      display: flex; align-items: center; gap: 8px; z-index: 1000;
-      max-width: 96vw; pointer-events: none;
-    }
     #coord-bar {
+      position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%);
       background: rgba(15, 23, 42, 0.92); color: #38bdf8; padding: 6px 14px;
       border-radius: 6px; font-family: 'Courier New', Consolas, monospace; font-size: 13px;
-      font-weight: bold; border: 1px solid #334155; pointer-events: none;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.6); white-space: nowrap;
-      letter-spacing: 0.5px; overflow: hidden; text-overflow: ellipsis;
+      font-weight: bold; z-index: 1000; border: 1px solid #334155;
+      pointer-events: none; box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+      white-space: nowrap; letter-spacing: 0.5px; max-width: 94vw;
+      overflow: hidden; text-overflow: ellipsis;
     }
-    #current-pos-box {
-      background: rgba(15, 23, 42, 0.95); color: #00ffcc; padding: 6px 12px;
-      border-radius: 6px; font-family: 'Courier New', Consolas, monospace; font-size: 13px;
-      font-weight: bold; border: 1px solid #10b981; cursor: pointer;
-      pointer-events: auto; box-shadow: 0 4px 12px rgba(0,0,0,0.6);
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-      max-width: 280px; transition: all 0.15s; user-select: none;
-    }
-    #current-pos-box:hover {
-      background: #1e293b; border-color: #00ffcc;
-      box-shadow: 0 0 8px rgba(0, 255, 204, 0.35);
-    }
-    .center-reticle-btn {
-      width: 30px; height: 30px; background: #ffffff; color: #0f172a;
-      display: flex !important; align-items: center; justify-content: center;
-      cursor: pointer; transition: background 0.15s;
-    }
-    .center-reticle-btn:hover { background: #f1f5f9; color: #ef4444; }
 
     .mgrs-grid-label {
       background: rgba(15, 23, 42, 0.85); color: #f8fafc; padding: 1px 5px;
@@ -599,12 +578,7 @@
 
 <div id="map"></div>
 
-<div id="bottom-coord-container">
-  <div id="coord-bar">🎯 移動滑鼠顯示 MGRS 戰術座標...</div>
-  <div id="current-pos-box" onclick="promptSetCurrentPos()" title="點擊輸入 MGRS 座標、經緯度或地址">
-    📍 <span id="current-pos-text">[Aktuelle Position]</span>
-  </div>
-</div>
+<div id="coord-bar">🎯 Maus bewegen für MGRS-Koordinaten...</div>
 
 <div id="log-panel" class="collapsed">
   <div id="log-header" onclick="toggleLogPanel()">
@@ -876,33 +850,7 @@
   // ============================================================================
   // 1. Karteninitialisierung & Kartenebenen-Auswahl (OpenTopoMap ganz oben)
   // ============================================================================
-  const map = L.map('map', { maxZoom: 22, zoomControl: false }).setView([25.002, 121.533], 16);
-
-  // 🎯 1. 先加入左上角「小瞄準鏡」方格按鈕 (排在 Zoom in/out 正上方)
-  const CenterReticleControl = L.Control.extend({
-    options: { position: 'topleft' },
-    onAdd: function() {
-      const container = L.DomUtil.create('div', 'leaflet-bar leaflet-control');
-      L.DomEvent.disableClickPropagation(container);
-      container.innerHTML = `
-        <a class="center-reticle-btn" onclick="centerOnSavedPosition()" title="定位至[現在位置] (Centre on Saved Position)" role="button">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="7"></circle>
-            <line x1="12" y1="2" x2="12" y2="6"></line>
-            <line x1="12" y1="18" x2="12" y2="22"></line>
-            <line x1="2" y1="12" x2="6" y2="12"></line>
-            <line x1="18" y1="12" x2="22" y2="12"></line>
-            <circle cx="12" cy="12" r="1.5" fill="currentColor"></circle>
-          </svg>
-        </a>
-      `;
-      return container;
-    }
-  });
-  map.addControl(new CenterReticleControl());
-
-  // 🔍 2. 再加入標準的 Zoom in / Zoom out 按鈕 (就會自動排在小瞄準鏡正下方！)
-  L.control.zoom({ position: 'topleft' }).addTo(map);
+  const map = L.map('map', { maxZoom: 22 }).setView([25.002, 121.533], 16);
 
   function adjustMapHeight() {
     const topbar = document.getElementById('topbar');
@@ -921,7 +869,7 @@
 
   const openTopo = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
     subdomains: ['a', 'b', 'c'], minZoom: 1, maxZoom: 22, maxNativeZoom: 17, attribution: '© OpenTopoMap'
-  });
+  }).addTo(map);
 
   const googleHybrid = L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
     minZoom: 0, maxZoom: 22, maxNativeZoom: 20, attribution: '© Google Hybrid'
@@ -929,7 +877,7 @@
 
   const twHappyman = L.tileLayer('https://tile.happyman.idv.tw/map/rudy/{z}/{x}/{y}.png', {
     minZoom: 1, maxZoom: 22, maxNativeZoom: 19, attribution: '© Taiwan Topo (Rudy)'
-  }).addTo(map);
+  });
 
   const cycleOsm = L.tileLayer('https://a.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png', {
     minZoom: 0, maxZoom: 22, maxNativeZoom: 20, attribution: '© CycleOSM'
@@ -2856,85 +2804,6 @@
     }
   }
 
-// ============================================================================
-  // 🎯 [現在位置] 座標/地址解析與左上角小瞄準鏡定位引擎
-  // ============================================================================
-  let savedCurrentPos = null; // 暫存格式: { lat, lng, label }
-
-  window.promptSetCurrentPos = async function() {
-    const isEn = (currentLang === 'en');
-    const promptMsg = isEn
-      ? '🎯 Enter MGRS Grid, Lat/Lng (e.g. 25.002, 121.533), or Address:'
-      : '🎯 Bitte Koordinaten oder Adresse eingeben.';
-    const defaultVal = savedCurrentPos ? savedCurrentPos.label : '';
-    const rawInput = prompt(promptMsg, defaultVal);
-    if (!rawInput || !rawInput.trim()) return;
-
-    const input = rawInput.trim();
-    const posTextEl = document.getElementById('current-pos-text');
-
-    // 1. 優先嘗試解析為「經緯度 (Lat, Lng)」
-    const latLngMatch = input.match(/^(-?\d+(?:\.\d+)?)\s*[,\s]\s*(-?\d+(?:\.\d+)?)$/);
-    if (latLngMatch) {
-      const lat = parseFloat(latLngMatch[1]);
-      const lng = parseFloat(latLngMatch[2]);
-      if (lat >= -90 && lat <= 90 && lng >= -180 && lng <= 180) {
-        const mgrsStr = toFormattedMGRS(lat, lng);
-        savedCurrentPos = { lat, lng, label: mgrsStr };
-        posTextEl.innerText = mgrsStr;
-        map.setView([lat, lng], Math.max(map.getZoom(), 17), { animate: true });
-        return;
-      }
-    }
-
-    // 2. 嘗試解析為「MGRS 戰術座標」
-    const cleanMgrs = input.replace(/\s+/g, '').toUpperCase();
-    if (/^\d{1,2}[A-Z]{3}\d{2,10}$/.test(cleanMgrs) && typeof mgrs !== 'undefined') {
-      try {
-        const pt = mgrs.toPoint(cleanMgrs);
-        if (pt && !isNaN(pt[1]) && !isNaN(pt[0])) {
-          const lat = pt[1], lng = pt[0];
-          const formattedMgrs = toFormattedMGRS(lat, lng);
-          savedCurrentPos = { lat, lng, label: formattedMgrs };
-          posTextEl.innerText = formattedMgrs;
-          map.setView([lat, lng], Math.max(map.getZoom(), 17), { animate: true });
-          return;
-        }
-      } catch (e) {}
-    }
-
-    // 3. 若非純座標，自動透過 OpenStreetMap Nominatim 搜尋「地址或地標名稱」
-    try {
-      posTextEl.innerText = isEn ? '⏳ Searching...' : '⏳ 定位中...';
-      const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(input)}&limit=1`);
-      const data = await res.json();
-      if (Array.isArray(data) && data.length > 0) {
-        const lat = parseFloat(data[0].lat);
-        const lng = parseFloat(data[0].lon);
-        const mgrsStr = toFormattedMGRS(lat, lng);
-        const shortLabel = `${input} (${mgrsStr})`;
-        savedCurrentPos = { lat, lng, label: shortLabel };
-        posTextEl.innerText = shortLabel;
-        map.setView([lat, lng], Math.max(map.getZoom(), 17), { animate: true });
-      } else {
-        posTextEl.innerText = savedCurrentPos ? savedCurrentPos.label : (isEn ? '[Current Pos]' : '[現在位置]');
-        alert(isEn ? '❌ Location not found! Please check your coordinates or address.' : '❌ 找不到該座標或地址！請確認格式是否正確。');
-      }
-    } catch (err) {
-      posTextEl.innerText = savedCurrentPos ? savedCurrentPos.label : (isEn ? '[Current Pos]' : '[現在位置]');
-      alert(isEn ? '❌ Search error!' : '❌ 查詢地址時發生網路錯誤！');
-    }
-  };
-
-  window.centerOnSavedPosition = function() {
-    if (!savedCurrentPos) {
-      // 如果還沒設定過[現在位置]，按小瞄準鏡就直接幫你跳出輸入視窗！
-      promptSetCurrentPos();
-      return;
-    }
-    map.setView([savedCurrentPos.lat, savedCurrentPos.lng], Math.max(map.getZoom(), 17), { animate: true });
-  };
-  
   setInterval(pollTacticalCloudUpdates, 15000);
 </script>
 </body>
