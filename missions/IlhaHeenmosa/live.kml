@@ -259,5 +259,29 @@ Stand: 27.10.2026, 18:21:26 (Stephanie)]]></description>
       </Style>
       <Point><coordinates>121.538905,25.002108,0</coordinates></Point>
     </Placemark>
+    <Placemark>
+      <name><![CDATA[微笑狗]]></name>
+      <description><![CDATA[[Einsatz: IlhaHeenmosa]
+[Kategorie: 🟢 Versorgungspunkt / Sicherheit]
+
+Koord.: 51R UH 51987 65834 (25.00078, 121.53331)
+Stand: 3.11.2026, 04:27:00 (Stephanie)]]></description>
+      <styleUrl>#style_supply</styleUrl>
+      <Style>
+        <IconStyle>
+          <color>ff00ff00</color>
+          <scale>1.1</scale>
+          <Icon>
+            <href>https://HamsterTAK.github.io/Heenisteininu/google_pin.png</href>
+          </Icon>
+          <hotSpot x="0.5" y="0.04" xunits="fraction" yunits="fraction"/>
+        </IconStyle>
+        <LabelStyle>
+          <color>ffffffff</color>
+          <scale>1.0</scale>
+        </LabelStyle>
+      </Style>
+      <Point><coordinates>121.53331,25.000776,0</coordinates></Point>
+    </Placemark>
   </Document>
 </kml>
