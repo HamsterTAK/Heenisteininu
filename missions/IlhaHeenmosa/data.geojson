@@ -43,11 +43,11 @@
       "type": "Feature",
       "properties": {
         "name": "需要無人機偵查",
-        "category": "uav",
+        "category": "completed",
         "desc": "",
         "stream": "",
         "coord": "51R UH 51935 65961 (25.00192, 121.53278)",
-        "time": "4.11.2026, 04:06:03 (Stephanie)",
+        "time": "4.11.2026, 04:08:38 (Stephanie)",
         "updatedBy": "Stephanie"
       },
       "geometry": {
