@@ -19,6 +19,25 @@
           25.002089
         ]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "需要修理",
+        "category": "repair",
+        "desc": "",
+        "stream": "",
+        "coord": "51R UH 51918 65888 (25.00125, 121.53262)",
+        "time": "4.11.2026, 04:05:20 (Stephanie)",
+        "updatedBy": "Stephanie"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.532623,
+          25.001252
+        ]
+      }
     }
   ]
 }
