@@ -332,17 +332,17 @@ Stand: 4.11.2026, 04:05:20 (Stephanie)]]></description>
     <Placemark>
       <name><![CDATA[需要無人機偵查]]></name>
       <description><![CDATA[[Einsatz: IlhaHeenmosa]
-[Kategorie: 🛸 Drohne / UAV-Einsatz]
+[Kategorie: 🟢✅ Auftrag erfüllt / Gesichert]
 
 Koord.: 51R UH 51935 65961 (25.00192, 121.53278)
-Stand: 4.11.2026, 04:06:03 (Stephanie)]]></description>
-      <styleUrl>#style_uav</styleUrl>
+Stand: 4.11.2026, 04:08:38 (Stephanie)]]></description>
+      <styleUrl>#style_completed</styleUrl>
       <Style>
         <IconStyle>
           <color>ffffffff</color>
           <scale>1.1</scale>
           <Icon>
-            <href>https://HamsterTAK.github.io/Heenisteininu/pin_uav_v2.png</href>
+            <href>https://HamsterTAK.github.io/Heenisteininu/pin_completed_v2.png</href>
           </Icon>
           <hotSpot x="0.5" y="0.28" xunits="fraction" yunits="fraction"/>
         </IconStyle>
